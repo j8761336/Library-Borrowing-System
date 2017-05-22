@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
@@ -5,33 +6,40 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ReviseUser {
-
+public class CommonUser {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		reviseUser rU = new reviseUser();
-		rU.setVisible(true);
+		addUser aU = new addUser();
+		aU.setVisible(true);
 	}
-
 }
 
-class reviseUser extends JFrame {
-	private String jblname[] = { "帳號:", "更改密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:" };
+class addUser extends JFrame {
+	private String jblname[] = { "帳號:", "密碼:", "再次輸入密碼:", "姓名:", "生日:", "連絡電話:", "E-Mail:", "系級:" };
 	private JLabel jbl[] = new JLabel[8];
 	private JButton subjbtn = new JButton("送出");
+	// private JTextField accjtf = new JTextField();
+	// private JTextField passjtf = new JTextField();
+	// private JTextField passagainjtf = new JTextField();
+	// private JTextField namejtf = new JTextField();
+	// private JTextField birthjtf = new JTextField();
+	// private JTextField phonejtf = new JTextField();
+	// private JTextField emailjtf = new JTextField();
+	// private JTextField subjectjtf = new JTextField();
 	private JTextField jtf[] = new JTextField[8];
 	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private JPanel jtfjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private Container cp;
 	private Font f1 = new Font(null, Font.CENTER_BASELINE, 24);
 
-	public reviseUser() {
+	public addUser() {
 		init();
 	}
 
@@ -42,8 +50,7 @@ class reviseUser extends JFrame {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
-
-		this.setTitle("修改使用者");
+		this.setTitle("創建一般使用者");
 		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
 			jlbjpl.add(jbl[i]);
@@ -61,10 +68,11 @@ class reviseUser extends JFrame {
 		g.gridheight = 1;
 		g.gridx = 0;
 		g.gridy = 0;
-		g.insets = new Insets(100, 0, 0, 0);
+		g.insets = new Insets(100, 50, 0, 0);
 		g.fill = GridBagConstraints.BOTH;
 		g.anchor = GridBagConstraints.WEST;
 		cp.add(jlbjpl, g);
+		g.insets = new Insets(100, 0, 0, 50);
 		g.fill = GridBagConstraints.BOTH;
 		g.weightx = 2;
 		g.gridwidth = 2;
