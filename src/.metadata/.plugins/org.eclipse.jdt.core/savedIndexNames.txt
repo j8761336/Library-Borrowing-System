@@ -1,0 +1,2 @@
+INDEX VERSION 1.129+D:\github\Pringithub\Library-Borrowing-System\src\.metadata\.plugins\org.eclipse.jdt.core
+105320258.index

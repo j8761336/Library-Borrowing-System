@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
@@ -21,9 +22,9 @@ public class CommonUser {
 }
 
 class addUser extends JFrame {
-	private String jblname[] = { "±b¸¹:", "±K½X:", "¦A¦¸¿é¤J±K½X:", "©m¦W:", "¥Í¤é:", "³sµ¸¹q¸Ü:", "E-Mail:", "¨t¯Å:" };
+	private String jblname[] = { "å¸³è™Ÿ:", "å¯†ç¢¼:", "å†æ¬¡è¼¸å…¥å¯†ç¢¼:", "å§“å:", "ç”Ÿæ—¥:", "é€£çµ¡é›»è©±:", "E-Mail:", "ç³»ç´š:" };
 	private JLabel jbl[] = new JLabel[8];
-	private JButton subjbtn = new JButton("°e¥X");
+	private JButton subjbtn = new JButton("é€å‡º");
 	// private JTextField accjtf = new JTextField();
 	// private JTextField passjtf = new JTextField();
 	// private JTextField passagainjtf = new JTextField();
@@ -49,7 +50,7 @@ class addUser extends JFrame {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
-		this.setTitle("³Ğ«Ø¤@¯ë¨Ï¥ÎªÌ");
+		this.setTitle("å‰µå»ºä¸€èˆ¬ä½¿ç”¨è€…");
 		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
 			jlbjpl.add(jbl[i]);
@@ -67,10 +68,11 @@ class addUser extends JFrame {
 		g.gridheight = 1;
 		g.gridx = 0;
 		g.gridy = 0;
-		g.insets = new Insets(100, 0, 0, 0);
+		g.insets = new Insets(100, 50, 0, 0);
 		g.fill = GridBagConstraints.BOTH;
 		g.anchor = GridBagConstraints.WEST;
 		cp.add(jlbjpl, g);
+		g.insets = new Insets(100, 0, 0, 50);
 		g.fill = GridBagConstraints.BOTH;
 		g.weightx = 2;
 		g.gridwidth = 2;
