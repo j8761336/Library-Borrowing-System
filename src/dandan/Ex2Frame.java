@@ -18,11 +18,11 @@ public class Ex2Frame extends JFrame{
 	}
 	private void initComp(){
 		this.setBounds(100,100,600,600);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		jmuFile.add(jmuitemOpen);
 		jmuFile.add(jmuitemExit);
 		jmuitemExit.addActionListener(new ActionListener(){
-			@Override
+
 			public void actionPerformed(ActionEvent e){
 				System.exit(0);
 			}
@@ -33,9 +33,8 @@ public class Ex2Frame extends JFrame{
 		jmbar.add(jmuDB);
 		this.setJMenuBar(jmbar);
 		jmuDBConn.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent e) {
-				dbConn =new DBConnection();
+				dbConn =new DBConnection("csieJava2","1Inus@1tz3");
 			}
 		});
 	}
