@@ -21,9 +21,9 @@ public class ReviseUser {
 	}
 
 }class changeUser extends JFrame {
-	private String jblname[] = { "帳號:", "更改密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:" };
+	private String jblname[] = { "�b��:", "���K�X:", "�A����J�K�X:", "�m�W:", "�ͤ�:", "�p���q��:", "E-Mail:", "�t��:" };
 	private JLabel jbl[] = new JLabel[8];
-	private JButton subjbtn = new JButton("送出");
+	private JButton subjbtn = new JButton("�e�X");
 	private JTextField jtf[] = new JTextField[8];
 	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private JPanel jtfjpl = new JPanel(new GridLayout(8, 1, 3, 3));
@@ -42,7 +42,7 @@ public class ReviseUser {
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
 
-		this.setTitle("修改使用者");
+		this.setTitle("�ק�ϥΪ�");
 		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
 			jlbjpl.add(jbl[i]);

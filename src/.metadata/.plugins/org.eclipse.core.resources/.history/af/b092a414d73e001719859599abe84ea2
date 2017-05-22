@@ -23,7 +23,7 @@ public class ReviseUser {
 }class changeUser extends JFrame {
 	private String jblname[] = { "帳號:", "更改密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:" };
 	private JLabel jbl[] = new JLabel[8];
-	private JButton subjbtn = new JButton("送出");
+	private JButton subjbtn = new JButton(("送出");
 	private JTextField jtf[] = new JTextField[8];
 	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private JPanel jtfjpl = new JPanel(new GridLayout(8, 1, 3, 3));
