@@ -5,7 +5,7 @@ public class ReviseUser {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		reviseUser rU = new reviseUser();
-		aU.setVisible(true);
+		rU.setVisible(true);
 	}
 
 }
@@ -31,6 +31,7 @@ class reviseUser extends JFrame {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
+
 		this.setTitle("修改使用者");
 		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
