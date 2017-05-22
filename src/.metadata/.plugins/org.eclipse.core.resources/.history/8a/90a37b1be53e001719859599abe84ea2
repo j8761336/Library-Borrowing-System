@@ -60,11 +60,10 @@ public class ReviseUser {
 		g.gridheight = 1;
 		g.gridx = 0;
 		g.gridy = 0;
-		g.insets = new Insets(100, 50, 0, 0);
+		g.insets = new Insets(100, 50, 0, 50);
 		g.fill = GridBagConstraints.BOTH;
 		g.anchor = GridBagConstraints.WEST;
 		cp.add(jlbjpl, g);
-		g.insets = new Insets(100, 0, 0, 50);
 		g.fill = GridBagConstraints.BOTH;
 		g.weightx = 2;
 		g.gridwidth = 2;
