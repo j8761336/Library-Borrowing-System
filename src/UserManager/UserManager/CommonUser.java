@@ -1,4 +1,5 @@
 package UserManager;
+
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
@@ -22,9 +23,9 @@ public class CommonUser {
 }
 
 class addUser extends JFrame {
-	private String jblname[] = { "帳號:", "密碼:", "再次輸入密碼:", "姓名:", "生日:", "連絡電話:", "E-Mail:", "系級:" };
+	private String jblname[] = {  "帳號:", "輸入密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:"};
 	private JLabel jbl[] = new JLabel[8];
-	private JButton subjbtn = new JButton("送出");
+	private JButton subjbtn = new JButton("�");
 	// private JTextField accjtf = new JTextField();
 	// private JTextField passjtf = new JTextField();
 	// private JTextField passagainjtf = new JTextField();
