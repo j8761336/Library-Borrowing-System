@@ -1,3 +1,4 @@
+package UserManager;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
@@ -12,25 +13,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ReviseUser {
-
+public class CommonUser {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		changeUser cU = new changeUser();
-		cU.setVisible(true);
+		addUser aU = new addUser();
+		aU.setVisible(true);
 	}
+}
 
-}class changeUser extends JFrame {
-	private String jblname[] = { "帳號:", "更改密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:" };
+class addUser extends JFrame {
+	private String jblname[] = { "帳號:", "密碼:", "再次輸入密碼:", "姓名:", "生日:", "連絡電話:", "E-Mail:", "系級:" };
 	private JLabel jbl[] = new JLabel[8];
 	private JButton subjbtn = new JButton("送出");
+	// private JTextField accjtf = new JTextField();
+	// private JTextField passjtf = new JTextField();
+	// private JTextField passagainjtf = new JTextField();
+	// private JTextField namejtf = new JTextField();
+	// private JTextField birthjtf = new JTextField();
+	// private JTextField phonejtf = new JTextField();
+	// private JTextField emailjtf = new JTextField();
+	// private JTextField subjectjtf = new JTextField();
 	private JTextField jtf[] = new JTextField[8];
 	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private JPanel jtfjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private Container cp;
 	private Font f1 = new Font(null, Font.CENTER_BASELINE, 24);
 
-	public changeUser() {
+	public addUser() {
 		init();
 	}
 
@@ -41,8 +50,7 @@ public class ReviseUser {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
-
-		this.setTitle("修改使用者");
+		this.setTitle("創建一般使用者");
 		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
 			jlbjpl.add(jbl[i]);
