@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="UserManager/" kind="src" path=""/>
-	<classpathentry kind="src" path="UserManager"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/jfreechart-1.0.1/lib/jcommon-1.0.0.jar"/>
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/jfreechart-1.0.1/lib/jfreechart-1.0.1.jar"/>
