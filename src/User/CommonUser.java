@@ -48,7 +48,6 @@ class addUser extends JFrame {
 	private void init() {
 		this.setBounds(10, 10, 700, 700);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout(5, 5));
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
