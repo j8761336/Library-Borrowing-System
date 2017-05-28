@@ -1,4 +1,4 @@
-package PenGuin;
+package Preferences;
 import java.awt.event.WindowAdapter;  
 import java.awt.event.WindowEvent;  
 import javax.swing.JFrame;   
@@ -23,7 +23,7 @@ public class PieChart extends JFrame{
 	}
 	public PieChart(String applicationTitle,String ChartTitle){
 		super(applicationTitle);
-		PieDataset dataset = creatDataset();//這邊建立了餅圖
+		PieDataset dataset = creatDataset();
 		JFreeChart chart =creatChart(dataset,ChartTitle);
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(700, 300));
@@ -31,9 +31,7 @@ public class PieChart extends JFrame{
 		setDefaultCloseOperation(PieChart.DISPOSE_ON_CLOSE);
 
 	}
-	/*
-	 * 修改資料從這邊抓就好
-	 */
+
 	private PieDataset creatDataset(){
 		result= new DefaultPieDataset();
 		result.setValue(Library.Chinese, 25);
@@ -64,7 +62,7 @@ public class PieChart extends JFrame{
 				false
 				);
 		PiePlot3D plot = (PiePlot3D) chart.getPlot();
-		plot.setStartAngle(290);
+		plot.setStartAngle(300);
 		plot.setDirection(Rotation.CLOCKWISE);
 		plot.setForegroundAlpha(0.5f);
 		return chart;

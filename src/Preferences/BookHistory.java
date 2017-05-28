@@ -1,4 +1,4 @@
-package PenGuin;
+package Preferences;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
