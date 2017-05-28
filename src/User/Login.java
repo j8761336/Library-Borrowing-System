@@ -1,0 +1,80 @@
+package User;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Login {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Loginframe lf = new Loginframe();
+		lf.setVisible(true);
+	}
+
+}
+
+class Loginframe extends JFrame {
+	private JLabel idjlb = new JLabel("帳號");
+	private JTextField idjtf = new JTextField("");
+	private JLabel passwordjlb = new JLabel("密碼");
+	private JTextField passwordjtf = new JTextField("");
+	private JButton submitjbtn = new JButton("登入");
+	private JPanel jlbjpl = new JPanel(new GridLayout(2, 1, 3, 25));
+	private JPanel jtfjpl = new JPanel(new GridLayout(2, 1, 0, 20));
+	private Font f1=new Font(null,Font.BOLD,16);
+	private Container cp;
+
+	public Loginframe() {
+		init();
+	}
+
+	private void init() {
+		this.setBounds(10, 10, 700, 400);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		cp = this.getContentPane();
+		cp.setLayout(new GridBagLayout());
+		this.setTitle("資工系圖書館  管理系統");
+		jlbjpl.add(idjlb);
+		jlbjpl.add(passwordjlb);
+		jtfjpl.add(idjtf);
+		jtfjpl.add(passwordjtf);
+		idjlb.setFont(f1);
+		passwordjlb.setFont(f1);
+		submitjbtn.setFont(f1);
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.anchor = GridBagConstraints.WEST;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		// gbc.insets = new Insets(50, 250, 50, 0);
+		gbc.insets = new Insets(50, 100, 50, 0);
+		cp.add(jlbjpl, gbc);
+		gbc.fill = GridBagConstraints.BOTH;
+		// gbc.gridx = 1;
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.weightx = 2;
+		gbc.gridwidth = 2;
+		// gbc.insets = new Insets(50, 0, 50, 150);
+		gbc.insets = new Insets(50, 0, 40, 250);
+		cp.add(jtfjpl, gbc);
+		gbc.fill = GridBagConstraints.NONE;
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.insets=new Insets(10,200,50,200);
+		cp.add(submitjbtn, gbc);
+
+	}
+
+}
