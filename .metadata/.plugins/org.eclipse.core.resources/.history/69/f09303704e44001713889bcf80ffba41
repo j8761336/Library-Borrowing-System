@@ -1,0 +1,34 @@
+package User;
+
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+public class NewPassword {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+newpassword np=new newpassword();
+np.setVisible(true);
+	}
+
+}
+class newpassword extends JFrame{
+	private JLabel jlb1=new JLabel("新密碼:");
+	private JLabel jlb2=new JLabel("再次輸入新密碼:");
+	private JButton jbt=new JButton("送出");
+	private Container cp;
+	private JPanel jpl=new JPanel(new GridLayout(2,1,3,3));
+	private Font ft=new Font(null,Font.BOLD,24);
+	public newpassword(){
+		init();
+	}
+	private void init(){
+		
+	}
+}

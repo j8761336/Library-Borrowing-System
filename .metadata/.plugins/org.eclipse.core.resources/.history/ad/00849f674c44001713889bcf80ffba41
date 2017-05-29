@@ -1,0 +1,10 @@
+package User;
+
+public class NewPassword {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
