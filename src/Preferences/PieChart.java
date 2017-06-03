@@ -8,14 +8,15 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.data.general.DefaultPieDataset;  
 import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;  
+//import org.jfree.util.Rotation;  
 
 public class PieChart extends JFrame{
 	
 	private DefaultPieDataset result;
-	
 	public enum Library{
-		Chinese("Chinese"),Math("Math"),English("English"),a123("123");
+		Chinese("Chinese"),Math("Math"),English("English"),
+		//a123("123")
+		;
 		private String msg; 
 		private Library(String msg){
 			this.msg=msg;
@@ -29,7 +30,6 @@ public class PieChart extends JFrame{
 		chartPanel.setPreferredSize(new java.awt.Dimension(700, 300));
 		setContentPane(chartPanel);
 		setDefaultCloseOperation(PieChart.DISPOSE_ON_CLOSE);
-
 	}
 
 	private PieDataset creatDataset(){
@@ -37,7 +37,9 @@ public class PieChart extends JFrame{
 		result.setValue(Library.Chinese, 25);
 		result.setValue(Library.English, 25);
 		result.setValue(Library.Math, 25);
-		result.setValue(Library.a123, 25);
+		
+//		result.setValue(Library.a123, 25);
+		
 //		result.setValue(Library.Chinese, 33);
 //		result.setValue(Library.English, 33);
 //		result.setValue(Library.Math, 33);
@@ -63,8 +65,9 @@ public class PieChart extends JFrame{
 				);
 		PiePlot3D plot = (PiePlot3D) chart.getPlot();
 		plot.setStartAngle(300);
-		plot.setDirection(Rotation.CLOCKWISE);
-		plot.setForegroundAlpha(0.5f);
+		plot.setStartAngle(180);
+		plot.setStartAngle(270);
+		plot.setForegroundAlpha(0.4f);
 		return chart;
 	}
 }
