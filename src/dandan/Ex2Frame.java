@@ -32,10 +32,11 @@ public class Ex2Frame extends JFrame{
 		jmuDB.add(jmuDBDisConn);
 		jmbar.add(jmuDB);
 		this.setJMenuBar(jmbar);
+		
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dbConn =new DBConnection("csieJava2","1Inus@1tz3");
+				dbConn =new DBConnection("linus870529","yu870529");
 			}
 		});
 	}
