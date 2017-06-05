@@ -5,5 +5,8 @@
 	<classpathentry kind="lib" path="D:/User/Desktop/新增資料夾 (6)/jcommon-1.0.0.jar"/>
 	<classpathentry kind="lib" path="D:/User/Desktop/新增資料夾 (6)/jfreechart-1.0.1.jar"/>
 	<classpathentry kind="lib" path="D:/User/Desktop/新增資料夾 (6)/mysql-connector-java-5.1.42-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/20160117/Desktop/圖書借閱期末專題/jfreechart-1.0.1/lib/jcommon-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/20160117/Desktop/圖書借閱期末專題/jfreechart-1.0.1/lib/jfreechart-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/20160117/Desktop/圖書借閱期末專題/mysql-connector-java-5.1.42-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
