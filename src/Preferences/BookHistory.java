@@ -28,8 +28,8 @@ public class BookHistory extends JFrame{
 	private DefaultTableModel tmodel;
 	private JTable jtb1 ;
 	
-	public BookHistory(String td[][]){
-		JShowData(td);
+	public BookHistory(String td[][],int datacount){
+		JShowData(td,datacount);
 		init();
 	}
 	
@@ -58,9 +58,23 @@ public class BookHistory extends JFrame{
 
 	}
 	
-	private void JShowData(String td [][]) {
-        tableData = td;
-        bookSign = new String[]{"類別","書名","作者","歸還日期","狀態"};
+	private void JShowData(String td [][],int datacount) {
+		
+		String count [] = new String [datacount];
+		for(int i=0;i<datacount;i++){
+			String tmp = Integer.toString(i+1);
+			 count [i] = tmp+".";
+		}
+		String td1 [][]= new String[datacount][6];
+		for(int j=0;j<datacount;j++){
+			 for(int x=1;x<6;x++){
+				 td1[j][0]=count[j];
+				 td1[j][x]=td[j][x-1];
+			 }
+		 }
+		
+        tableData = td1;
+        bookSign = new String[]{"No.","類別","書名","作者","歸還日期","狀態"};
         tmodel = new DefaultTableModel(tableData,bookSign); //建立表格
         
         /*

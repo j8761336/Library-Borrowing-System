@@ -17,6 +17,7 @@ public class BarChart extends ApplicationFrame{
 		JPanel jp1 = createDemoPanel();
 		jp1.setPreferredSize(new Dimension(650,350));//視窗大小
 		setContentPane(jp1);
+		setDefaultCloseOperation(BarChart.DISPOSE_ON_CLOSE);
 	}	
 	
 	
