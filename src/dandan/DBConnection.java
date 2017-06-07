@@ -15,7 +15,7 @@ public class DBConnection {
 			dbConn = DriverManager.getConnection(url,id,pw);
 			JOptionPane.showMessageDialog(null,"DB connecction success!!");
 		}catch(SQLException sqle){
-//			JOptionPane.showMessageDialog(null,"Error: "+ sqle.toString());
+			JOptionPane.showMessageDialog(null,"Error: "+ sqle.toString());
 			System.out.println(sqle);
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null,"Error: "+e.toString());

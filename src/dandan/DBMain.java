@@ -1,9 +1,9 @@
 package dandan;
 
 
-public class FrameMain {
+public class DBMain {
     public static void main(String args[]){
-        Ex2Frame ex2Frm = new Ex2Frame();
+        DBFrame ex2Frm = new DBFrame();
         ex2Frm.setVisible(true);
     }
 }

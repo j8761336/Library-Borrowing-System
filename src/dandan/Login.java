@@ -23,7 +23,7 @@ public class Login extends JFrame{
 		Dimension screenDimension = Toolkit.getDefaultToolkit().getScreenSize();
 		double screenWidth =  screenDimension.width;
 		double screenHeight = screenDimension.height;
-		int frameWidth = 320,frameHeight = 150;
+		int frameWidth = 500,frameHeight = 300;
 		this.setBounds((int)screenWidth/2 - frameWidth/2,(int)screenHeight/2 - frameHeight/2 -50,frameWidth,frameHeight);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		cp =this.getContentPane();
@@ -56,12 +56,12 @@ public class Login extends JFrame{
 		gbc.gridy = 3;
 		gbc.weighty = 1.0;
 		jbtnExit.setFont(font1);
-		jbtnExit.setPreferredSize(new Dimension( 50, 30));
+		jbtnExit.setPreferredSize(new Dimension( 40, 30));
 		cp.add(jbtnExit, gbc);
 		gbc.gridx = 2;
 		gbc.gridy = 3;
 		jbtnGo.setFont(font1);
-		jbtnGo.setPreferredSize(new Dimension( 50, 30));
+		jbtnGo.setPreferredSize(new Dimension( 40, 30));
 		cp.add(jbtnGo, gbc);
 		jbtnExit.addActionListener(new ActionListener(){
 

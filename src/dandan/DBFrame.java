@@ -3,7 +3,7 @@ package dandan;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class Ex2Frame extends JFrame{
+public class DBFrame extends JFrame{
 	private JMenuBar jmbar =new JMenuBar();
 	private JMenu jmuFile =new JMenu("File");
 	private JMenuItem jmuitemOpen =new JMenuItem("Open");
@@ -13,7 +13,7 @@ public class Ex2Frame extends JFrame{
 	private JMenuItem jmuDBDisConn =new JMenuItem("Disconnect");
 	private DBConnection dbConn;
 	
-	public Ex2Frame(){
+	public DBFrame(){
 		initComp();
 	}
 	private void initComp(){
@@ -36,7 +36,7 @@ public class Ex2Frame extends JFrame{
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dbConn =new DBConnection("linus870529","yu870529");
+				dbConn =new DBConnection("root","123456");
 			}
 		});
 	}
