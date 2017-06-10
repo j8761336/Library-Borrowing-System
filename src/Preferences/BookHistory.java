@@ -51,7 +51,7 @@ public class BookHistory extends JFrame{
 	private String td[][]; 
 	
 	
-	public BookHistory(String td[][]){
+	public BookHistory(){
 		JShowData(td);
 		init();
 		
@@ -77,7 +77,7 @@ public class BookHistory extends JFrame{
 		
 		pel1.add(time1);pel1.add(time2);
 		pel1.add(variety);pel1.add(search);pel1.add(doSearch);
-		
+			
 		jbr1.add(jm1);jbr1.add(jm2);
 		jm1.add(jmit1);jm1.add(jmit2); 
 		jm2.add(jmuDBConn);
@@ -150,6 +150,7 @@ public class BookHistory extends JFrame{
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
+					
 					while(rs.next()){
 						for(int i=1; i<=cnum; i++){
 //							tpd1[i-1] =rs.getObject(i);
@@ -158,7 +159,9 @@ public class BookHistory extends JFrame{
 						}tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
 					System.out.println("");
 					}
+					
 //					System.out.println(tdlist.size());
+					
 					String tmp [][]=new String [tdlist.size()][6];
 					for(int i=0;i<tdlist.size();i++){
 						tmp[i][0]=tdlist.get(i).retNum();
@@ -168,11 +171,25 @@ public class BookHistory extends JFrame{
 						tmp[i][4]=tdlist.get(i).returnDate();
 						tmp[i][5]=tdlist.get(i).Status();
 					}
+					
 					td=tmp;
-				}catch(Exception d){
+					
+//					jtb1.tableChanged(tmp);
+					JShowData(td);
+					jtb1.updateUI();
+					
+				}
+				catch(Exception d){
 					d.printStackTrace();
 					//System.out.println("error:"+d.toString());
 				}
+				
+//				for(int i=0;i<tdlist.size();i++){
+//					for(int x=0;x<6;x++){
+//						System.out.println(td[i][x]);
+//					}
+//				}
+				
 			}
 			
 		});
