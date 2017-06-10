@@ -1,9 +1,30 @@
 package Preferences;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import org.jfree.ui.RefineryUtilities;
+
+import java.sql.ResultSetMetaData;
+
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class BookHistory extends JFrame{
+	private String driver = "com.mysql.jdbc.Driver";
+	private String url ="jdbc:mysql://127.0.0.1:3306/test?";	
+	private Connection dbConn;
+	
 	private JTextField search = new JTextField();
 	private JButton doSearch = new JButton("search");
 	private JComboBox variety = new JComboBox();
@@ -12,8 +33,6 @@ public class BookHistory extends JFrame{
 	private JLabel space = new JLabel("  空     ");
 	private JLabel space1 = new JLabel("");
 	private JLabel space2 = new JLabel("");
-//	private JLabel time1 = new JLabel("time1");
-//	private JLabel time2 = new JLabel("time2");
 	private JLabel b1 = new JLabel("to",SwingConstants.CENTER);
 	private Container cp;
 	
@@ -22,18 +41,24 @@ public class BookHistory extends JFrame{
 	private JMenu jm2 = new JMenu("檔案");
 	private JMenuItem jmit1 = new JMenuItem("輸出圓餅圖");
 	private JMenuItem jmit2 = new JMenuItem("輸出長條圖");
+	private JMenuItem jmuDBConn =new JMenuItem("Connect");
 	
     private String [][] tableData;
     private String [] bookSign;
 	private DefaultTableModel tmodel;
 	private JTable jtb1 ;
 	
-	public BookHistory(String td[][],int datacount){
-		JShowData(td,datacount);
+	private String td[][]; 
+	
+	
+	public BookHistory(String td[][]){
+		JShowData(td);
 		init();
+		
 	}
 	
 	private void init(){
+		
 		this.setTitle("search(user)");
 		cp=this.getContentPane();
 		cp.setLayout(new BorderLayout(2,3));
@@ -42,38 +67,151 @@ public class BookHistory extends JFrame{
 		this.setDefaultCloseOperation(BookHistory.DISPOSE_ON_CLOSE);
 		Panel pel1 = new Panel();
 		Panel pel2 = new Panel();
-		pel1.setLayout(new GridLayout(1,6));
-		pel2.setLayout(new GridLayout(3,1));
+		pel1.setLayout(new GridLayout(1,5));
+		pel2.setLayout(new GridLayout(2,1));
 		cp.add(pel2,BorderLayout.NORTH);
 		cp.add(new JScrollPane(jtb1),BorderLayout.CENTER);
 		cp.add(space2,BorderLayout.SOUTH);
 		cp.setBackground(Color.LIGHT_GRAY);
-		pel2.add(jbr1);pel2.add(space1);pel2.add(pel1);
+		pel2.add(jbr1);pel2.add(pel1);
 		
-		pel1.add(time1);pel1.add(b1);pel1.add(time2);
+		pel1.add(time1);pel1.add(time2);
 		pel1.add(variety);pel1.add(search);pel1.add(doSearch);
+		
 		jbr1.add(jm1);jbr1.add(jm2);
-		jm1.add(jmit1);jm1.add(jmit2);
-		jm2.add(space);
+		jm1.add(jmit1);jm1.add(jmit2); 
+		jm2.add(jmuDBConn);
+		//jm2.add(space);
+		
+		time1.setBorder(BorderFactory.createTitledBorder("從"));
+		time2.setBorder(BorderFactory.createTitledBorder("到"));
+		variety.setBorder(BorderFactory.createTitledBorder("種類"));
+		
+		time1.addItem("日期");
+		time2.addItem("日期");
+		variety.addItem("借書時間");
+		variety.addItem("歸還時間");
+		
+		//------------------------------------------
+		jmuDBConn.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 DBConnection("root","");
+			}
+		});
+		
+		//------------------------------------------
+		jmit1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent a) {
+				PieChart demo = new PieChart("Pie2", "What kind of book do you like?");  
+	            demo.pack();  
+	            demo.setVisible(true);
+			}
+		});
+		
+		//-----------------------------------------
+		jmit2.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent c) {
+				BarChart longchart1 = new BarChart("<使用者偏好>");  
+				longchart1.pack();  
+				RefineryUtilities.centerFrameOnScreen(longchart1);  
+				longchart1.setVisible(true);  
+			}
+		});
+		String[] tpd = new String [6];
+		ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+		doSearch.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent b) {
+				// TODO Auto-generated method stub
+//				System.out.println("1");
+//				try{
+//					System.out.println("2");
+//					Statement stmt = dbConn.createStatement();
+//					System.out.println("3");
+//					String data1="INSERT INTO test1 VALUES ('2','104021074','國文類','文學賞析','未知','2017-06-07,'館藏中')";
+//					System.out.println("4");
+//					stmt.executeUpdate(data1);
+//				}
+//				catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+				//-------------------------------------
+				
+				
+				try{
+					DBConnection("root","");
+					Statement stmt = dbConn.createStatement();
+					String data2 = "SELECT * FROM test1";
+					ResultSet rs = stmt.executeQuery(data2);
+					ResultSetMetaData rm = rs.getMetaData();
+					int cnum = rm.getColumnCount();
+					while(rs.next()){
+						for(int i=1; i<=cnum; i++){
+//							tpd1[i-1] =rs.getObject(i);
+							tpd[i-1]=rs.getObject(i).toString();
+							System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+						}tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+					System.out.println("");
+					}
+//					System.out.println(tdlist.size());
+					String tmp [][]=new String [tdlist.size()][6];
+					for(int i=0;i<tdlist.size();i++){
+						tmp[i][0]=tdlist.get(i).retNum();
+						tmp[i][1]=tdlist.get(i).retVariety();
+						tmp[i][2]=tdlist.get(i).retBookName();
+						tmp[i][3]=tdlist.get(i).Author();
+						tmp[i][4]=tdlist.get(i).returnDate();
+						tmp[i][5]=tdlist.get(i).Status();
+					}
+					td=tmp;
+				}catch(Exception d){
+					d.printStackTrace();
+					//System.out.println("error:"+d.toString());
+				}
+			}
+			
+		});
+		
 	}
 	
-	private void JShowData(String td [][],int datacount) {
-		
-		String count [] = new String [datacount];
-		for(int i=0;i<datacount;i++){
-			String tmp = Integer.toString(i+1);
-			 count [i] = tmp+".";
+	private void DBConnection(String id,String pw){
+		try{
+			Class.forName(driver);
+			dbConn = DriverManager.getConnection(url,id,pw);
+			//JOptionPane.showMessageDialog(null,"DB connecction success!!");
+		}catch(SQLException sqle){
+//			JOptionPane.showMessageDialog(null,"Error: "+ sqle.toString());
+			System.out.println(sqle);
+		}catch(Exception e){
+			JOptionPane.showMessageDialog(null,"Error: "+e.toString());
 		}
-		String td1 [][]= new String[datacount][6];
-		for(int j=0;j<datacount;j++){
-			 for(int x=1;x<6;x++){
-				 td1[j][0]=count[j];
-				 td1[j][x]=td[j][x-1];
-			 }
-		 }
+	}
+	
+	/*
+	 * JTable的設定
+	 * td是要顯示的資料
+	 */
+	private void JShowData(String td [][]) {
 		
-        tableData = td1;
+//		String count [] = new String [datacount];
+//		for(int i=0;i<datacount;i++){
+//			String tmp = Integer.toString(i+1);
+//			 count [i] = tmp+".";
+//		}
+//		String td1 [][]= new String[datacount][6];
+//		for(int j=0;j<datacount;j++){
+//			 for(int x=1;x<6;x++){
+//				 td1[j][0]=count[j];
+//				 td1[j][x]=td[j][x-1];
+//			 }
+//		 }
+//		
+        tableData = td;
         bookSign = new String[]{"No.","類別","書名","作者","歸還日期","狀態"};
         tmodel = new DefaultTableModel(tableData,bookSign); //建立表格
         
@@ -101,4 +239,8 @@ public class BookHistory extends JFrame{
 
         //setDefaultCloseOperation();
     }
+	
+
 }
+
+

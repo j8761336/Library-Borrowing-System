@@ -15,7 +15,7 @@ public class PieChart extends JFrame{
 	private DefaultPieDataset result;
 	public enum Library{
 		Chinese("Chinese"),Math("Math"),English("English"),
-		//a123("123")
+		a123("123")
 		;
 		private String msg; 
 		private Library(String msg){
@@ -25,7 +25,7 @@ public class PieChart extends JFrame{
 	public PieChart(String applicationTitle,String ChartTitle){
 		super(applicationTitle);
 		PieDataset dataset = creatDataset();
-		JFreeChart chart =creatChart(dataset,ChartTitle);
+		JFreeChart chart =createChart(dataset,ChartTitle);
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(700, 300));
 		setContentPane(chartPanel);
@@ -38,8 +38,7 @@ public class PieChart extends JFrame{
 		result.setValue(Library.English, 25);
 		result.setValue(Library.Math, 25);
 		
-//		result.setValue(Library.a123, 25);
-		
+//		result.setValue(Library.a123, 25);	
 //		result.setValue(Library.Chinese, 33);
 //		result.setValue(Library.English, 33);
 //		result.setValue(Library.Math, 33);
