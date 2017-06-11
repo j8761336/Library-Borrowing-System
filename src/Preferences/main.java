@@ -30,7 +30,7 @@ public class main {
 //			longchart1.setVisible(true);  
 		    
 		    //-----------------------------------
-			String [][] htydata = {{"小說","哈利跌倒","J.K","2017-5-30","遺失"},{"參考書","教你三分鐘寫java","未知","2017-2-30","已歸還"}};
+//			String [][] htydata = {{"小說","哈利跌倒","J.K","2017-5-30","遺失"},{"參考書","教你三分鐘寫java","未知","2017-2-30","已歸還"}};
 //			String td [][] =  
 			BookHistory bst = new BookHistory();
 			bst.setVisible(true);
