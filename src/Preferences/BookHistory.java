@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import org.jfree.ui.RefineryUtilities;
 
@@ -45,7 +46,7 @@ public class BookHistory extends JFrame{
 	
     private String [][] tableData;
     private String [] bookSign;
-	private DefaultTableModel tmodel;
+	private TableModel tmodel;
 	private JTable jtb1 ;
 	
 	private String td[][]; 
@@ -81,7 +82,7 @@ public class BookHistory extends JFrame{
 		jbr1.add(jm1);jbr1.add(jm2);
 		jm1.add(jmit1);jm1.add(jmit2); 
 		jm2.add(jmuDBConn);
-		//jm2.add(space);
+		//jm2.add(space);	
 		
 		time1.setBorder(BorderFactory.createTitledBorder("從"));
 		time2.setBorder(BorderFactory.createTitledBorder("到"));
@@ -92,6 +93,7 @@ public class BookHistory extends JFrame{
 		variety.addItem("借書時間");
 		variety.addItem("歸還時間");
 		
+		String[] tpd = new String [6];
 		//------------------------------------------
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
@@ -104,7 +106,66 @@ public class BookHistory extends JFrame{
 		jmit1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent a) {
-				PieChart demo = new PieChart("Pie2", "What kind of book do you like?");  
+//				System.out.println();
+				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
+				
+				try{
+					DBConnection("root","");
+					Statement stmt = dbConn.createStatement();
+					String data2 = "SELECT * FROM test1";
+					ResultSet rs = stmt.executeQuery(data2);
+					ResultSetMetaData rm = rs.getMetaData();
+					int cnum = rm.getColumnCount();
+					
+					while(rs.next()){
+						for(int i=1; i<=cnum; i++){
+//							tpd1[i-1] =rs.getObject(i);
+							tpd[i-1]=rs.getObject(i).toString();
+							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+						}tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+					System.out.println("");
+					}
+					
+//					System.out.println(tdlist.size());
+					
+					String tmp [][]=new String [tdlist.size()][6];
+					for(int i=0;i<tdlist.size();i++){
+						tmp[i][0]=tdlist.get(i).retNum();
+						tmp[i][1]=tdlist.get(i).retVariety();
+						tmp[i][2]=tdlist.get(i).retBookName();
+						tmp[i][3]=tdlist.get(i).Author();
+						tmp[i][4]=tdlist.get(i).returnDate();
+						tmp[i][5]=tdlist.get(i).Status();
+					}
+					
+					for(int i=0;i<tdlist.size();i++){
+						if(tmp[i][1].equals("國文類")){
+							a1++;
+//							System.out.println(a1);
+						}else if(tmp[i][1].equals("英文類")){
+							a2++;
+						}else if(tmp[i][1].equals("數學類")){
+							a3++;
+						}else if(tmp[i][1].equals("資訊類")){
+							a4++;
+						}else {
+							a5++;
+						}
+					}
+					a1/=tdlist.size();a1*=100;
+					a2/=tdlist.size();a2*=100;
+					a3/=tdlist.size();a3*=100;
+					a4/=tdlist.size();a4*=100;
+					a5/=tdlist.size();a5*=100;
+//					System.out.println(a1);
+				}
+				
+				catch(Exception d){
+					d.printStackTrace();
+					//System.out.println("error:"+d.toString());
+				}
+				PieChart demo = new PieChart("Pie2", "What kind of book do you like?",a1,a2,a3,a4,a5);
 	            demo.pack();  
 	            demo.setVisible(true);
 			}
@@ -120,27 +181,13 @@ public class BookHistory extends JFrame{
 				longchart1.setVisible(true);  
 			}
 		});
-		String[] tpd = new String [6];
-		ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+		
+		
 		doSearch.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent b) {
 				// TODO Auto-generated method stub
-//				System.out.println("1");
-//				try{
-//					System.out.println("2");
-//					Statement stmt = dbConn.createStatement();
-//					System.out.println("3");
-//					String data1="INSERT INTO test1 VALUES ('2','104021074','國文類','文學賞析','未知','2017-06-07,'館藏中')";
-//					System.out.println("4");
-//					stmt.executeUpdate(data1);
-//				}
-//				catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-				//-------------------------------------
+				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
 				
 				
 				try{
@@ -155,7 +202,7 @@ public class BookHistory extends JFrame{
 						for(int i=1; i<=cnum; i++){
 //							tpd1[i-1] =rs.getObject(i);
 							tpd[i-1]=rs.getObject(i).toString();
-							System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
 						}tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
 					System.out.println("");
 					}
@@ -173,11 +220,8 @@ public class BookHistory extends JFrame{
 					}
 					
 					td=tmp;
-					
-//					jtb1.tableChanged(tmp);
-					JShowData(td);
-					jtb1.updateUI();
-					
+					bookSign = new String[]{"No.","類別","書名","作者","歸還日期","狀態"};
+					jtb1.setModel(new DefaultTableModel(td,bookSign));
 				}
 				catch(Exception d){
 					d.printStackTrace();
