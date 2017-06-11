@@ -102,7 +102,6 @@ public class Login extends JFrame {
 					String sqlStr = "select*from usermanagement where userid="+id+ "" ;
 					rs = st.executeQuery(sqlStr);
 					while (rs.next()) {
-						// if (rs.getString("userid").equals(id)) {
 						if (rs.getString("password").equals(str)) {
 							if (rs.getString("authority").equals("1")) {
 								MainFrame1 mf1 = new MainFrame1();
@@ -113,13 +112,8 @@ public class Login extends JFrame {
 							} if (rs.getString("authority").equals("3")) {
 								MainFrame3 mf3 = new MainFrame3();
 								mf3.setVisible(true);
-							} else {
-								JOptionPane.showMessageDialog(null, "Error!");
 							}
 						}
-
-						// }
-
 					}
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, ex);
