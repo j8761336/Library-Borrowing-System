@@ -36,7 +36,7 @@ public class DBFrame extends JFrame{
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dbConn =new DBConnection("root","123456");
+				dbConn =new DBConnection();
 			}
 		});
 	}
