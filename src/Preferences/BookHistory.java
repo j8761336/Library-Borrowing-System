@@ -124,78 +124,84 @@ public class BookHistory extends JFrame{
 				    // TODO Auto-generated method stub
 //				   System.out.println(time1.getSelectedItem());
 				   //time1.getSelectedItem();
-
-				   try {
-					Date userchosse = sdf.parse(time1.getSelectedItem().toString());
-//					System.out.println(time1.getSelectedItem().toString());
-					long day1=((userchosse.getTime() - date.getTime())/86400000);
-					long day2=((dt.getTime() - userchosse.getTime())/86400000);
-					Calendar calendar1 = Calendar.getInstance(); //得到日曆
-					Calendar calendar2 = Calendar.getInstance(); //得到日曆
-					calendar1.setTime(userchosse);//把當前時間賦给日曆
-//					calendar2.setTime();
-//					System.out.println(day2);
-//					System.out.println(calendar1.getTime());
-					if(combocount<=1){
-						for(int i=0;i<day;i++){
-							calendar1.add(Calendar.DAY_OF_MONTH, -1);
-							Date count = calendar1.getTime();
-							String tmp1 = sdf.format(count);
-							time2.removeItem(tmp1);
-							//---------------
-						}
-					}
-//					System.out.println(time2.getItemCount()-1);
-					if(combocount>1){
-						time2.removeAllItems();
-						Date count3 = calendar1.getTime();
-						String tmp12 = sdf.format(count3);
-						time2.addItem(tmp12);
-						for(int i=0;i<day2;i++){
-							
-							calendar1.add(Calendar.DAY_OF_MONTH, +1);
-							Date count = calendar1.getTime();
-							String tmp1 = sdf.format(count);
-//							System.out.println(tmp1);
-//							time2.addItem(tmp1);
-							int flag=0;
-							for(int j=0;j<day2;j++){
-								if(time2.getItemAt(j)==tmp1){
-									flag++;
+				   if(time1.getSelectedItem().equals("日期")){
+					   
+				   }else{
+					   try {
+							Date userchosse = sdf.parse(time1.getSelectedItem().toString());
+//							System.out.println(time1.getSelectedItem().toString());
+							long day1=((userchosse.getTime() - date.getTime())/86400000);
+							long day2=((dt.getTime() - userchosse.getTime())/86400000);
+							Calendar calendar1 = Calendar.getInstance(); //得到日曆
+							Calendar calendar2 = Calendar.getInstance(); //得到日曆
+							calendar1.setTime(userchosse);//把當前時間賦给日曆
+//							calendar2.setTime();
+//							System.out.println(day2);
+//							System.out.println(calendar1.getTime());
+							if(combocount<=1){
+								for(int i=0;i<day;i++){
+									calendar1.add(Calendar.DAY_OF_MONTH, -1);
+									Date count = calendar1.getTime();
+									String tmp1 = sdf.format(count);
+									time2.removeItem(tmp1);
+									//---------------
 								}
-							}if(flag==0){
-								time2.addItem(tmp1);
-								System.out.println(tmp1);
 							}
-						}
-//						for(int i=0;i<day2;i++){
-//							calendar1.add(Calendar.DAY_OF_MONTH, +1);
-//							Date count = calendar1.getTime();
-//							String tmp1 = sdf.format(count);
-//							System.out.println(tmp1);
-//							int qaq=0;
-//							for(int j=0;j<time2.getItemCount();j++){
-////								System.out.println(time2.getItemAt(j));
-//								if(tmp1==time2.getItemAt(j)){
-//									qaq++;
+//							System.out.println(time2.getItemCount()-1);
+							if(combocount>1){
+								time2.removeAllItems();
+								Date count3 = calendar1.getTime();
+								String tmp12 = sdf.format(count3);
+								time2.addItem(tmp12);
+								for(int i=0;i<day2;i++){
+									
+									calendar1.add(Calendar.DAY_OF_MONTH, +1);
+									Date count = calendar1.getTime();
+									String tmp1 = sdf.format(count);
+//									System.out.println(tmp1);
+//									time2.addItem(tmp1);
+									int flag=0;
+									for(int j=0;j<day2;j++){
+										if(time2.getItemAt(j)==tmp1){
+											flag++;
+										}
+									}if(flag==0){
+										time2.addItem(tmp1);
+//										System.out.println(tmp1);
+									}
+								}
+//								for(int i=0;i<day2;i++){
+//									calendar1.add(Calendar.DAY_OF_MONTH, +1);
+//									Date count = calendar1.getTime();
+//									String tmp1 = sdf.format(count);
+//									System.out.println(tmp1);
+//									int qaq=0;
+//									for(int j=0;j<time2.getItemCount();j++){
+////										System.out.println(time2.getItemAt(j));
+//										if(tmp1==time2.getItemAt(j)){
+//											qaq++;
+//										}
+//									}
+//									if(qaq==0){
+//										time2.addItem(tmp1);
+//									}
+//										
+//									
 //								}
-//							}
-//							if(qaq==0){
-//								time2.addItem(tmp1);
-//							}
-//								
-//							
-//						}
-						
-					}
-					
-					combocount++;
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+								
+							}
+							
+								combocount++;
+							} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+				   	}
 				   
-				   }
+				   
+				   
+				   
+				   		}
 				  });
 				 
 		//------------------------------------------
