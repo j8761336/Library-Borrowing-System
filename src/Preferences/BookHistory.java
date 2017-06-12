@@ -98,8 +98,10 @@ public class BookHistory extends JFrame{
 		time2.addItem("日期");
 		time2.addItem("全部時間");
 		variety.addItem("全部");
-		variety.addItem("借閱中");
+		variety.addItem("已借出");
 		variety.addItem("已歸還");
+		variety.addItem("遺失");
+		variety.addItem("館藏中");
 		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -318,13 +320,14 @@ public class BookHistory extends JFrame{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
 					
-//					if(!search.getText().equals("")){
-//						flag2="WHERE 書名  = 'abc'";
-//					}else{
-//						flag2="";
-//					}
+					if(!variety.getSelectedItem().equals("全部")){
+						flag2="where '狀態'  = '" +variety.getSelectedItem().toString()+"'";
+					}else{
+						flag2="";
+					}
 //					System.out.println(flag2);
-					String data2 = "SELECT * FROM test1 WHERE 狀態 = '遺失'";
+					String data2 = "SELECT * FROM test1 "+flag2;
+					System.out.println(data2);
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -375,7 +378,7 @@ public class BookHistory extends JFrame{
 //						}
 						 	
 						//-------------------------------------
-						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
+						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
 							if(time1.getSelectedItem().equals("全部時間")){
 								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
 							}else if(time.after(timeA)&&time.before(timeB)){
