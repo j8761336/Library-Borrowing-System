@@ -313,11 +313,18 @@ public class BookHistory extends JFrame{
 				// TODO Auto-generated method stub
 				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
 				Date time;Date timeA = null;Date timeB = null;
-				
+				String flag2 = null;
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					String data2 = "SELECT * FROM test1";
+					
+//					if(!search.getText().equals("")){
+//						flag2="WHERE 書名  = 'abc'";
+//					}else{
+//						flag2="";
+//					}
+//					System.out.println(flag2);
+					String data2 = "SELECT * FROM test1 WHERE 狀態 = '遺失'";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -342,31 +349,56 @@ public class BookHistory extends JFrame{
 						 * 外圈if是時間比較
 						 * 內圈是輸入文字條件比較
 						 */
-						if(time1.getSelectedItem().equals("全部時間")){
-							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
+//						if(time1.getSelectedItem().equals("全部時間")){
+//							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+//							}else if(variety.getSelectedItem().equals("全部")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+//							}else {
+//								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+//							}
+//							
+//						}else if(time1.getSelectedItem().equals("日期")){
+//							JOptionPane.showMessageDialog(null,"請選擇時間!!!!");
+//							break;
+//						}
+//						
+//						else if(time.after(timeA)&&time.before(timeB)){
+//							
+//							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+//							}else if(variety.getSelectedItem().equals("全部")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+//							}else {
+//								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+//							}
+//						}
+						 	
+						//-------------------------------------
+						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
+							if(time1.getSelectedItem().equals("全部時間")){
 								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-							}else if(variety.getSelectedItem().equals("全部")){
+							}else if(time.after(timeA)&&time.before(timeB)){
 								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-							}else {
+							}else{
 								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+								break;
 							}
-							
-						}else if(time1.getSelectedItem().equals("日期")){
-							JOptionPane.showMessageDialog(null,"請選擇時間!!!!");
-							break;
+						}else if(search.getText().equals("")){
+							if(time1.getSelectedItem().equals("全部時間")){
+								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+							}else if(time.after(timeA)&&time.before(timeB)){
+								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+							}else{
+								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+								break;
+							}
 						}
 						
-						else if(time.after(timeA)&&time.before(timeB)){
-							
-							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-							}else if(variety.getSelectedItem().equals("全部")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-							}else {
-								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
-							}
-						}
 						
+						
+						
+						//-------------------------------------
 //						else if(time.after(timeA)&&time2.getSelectedItem().equals("至今")){
 //							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
 //								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
