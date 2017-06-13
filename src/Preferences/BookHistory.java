@@ -156,7 +156,7 @@ public class BookHistory extends JFrame{
 									time1.removeItem("日期");
 								}
 								time2.removeAllItems();
-								time2.addItem("全部時間");
+								time2.addItem("至今");
 								Date count3 = calendar1.getTime();
 								String tmp12 = sdf.format(count3);
 								time2.addItem(tmp12);
