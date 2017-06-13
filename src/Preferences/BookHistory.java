@@ -94,7 +94,10 @@ public class BookHistory extends JFrame{
 		variety.setBorder(BorderFactory.createTitledBorder("種類"));
 		
 		time1.addItem("日期");
+		time1.addItem("全部時間");
 		time2.addItem("日期");
+		time2.addItem("全部時間");
+		variety.addItem("全部");
 		variety.addItem("借閱中");
 		variety.addItem("已歸還");
 		
@@ -124,76 +127,84 @@ public class BookHistory extends JFrame{
 				    // TODO Auto-generated method stub
 //				   System.out.println(time1.getSelectedItem());
 				   //time1.getSelectedItem();
-
-				   try {
-					Date userchosse = sdf.parse(time1.getSelectedItem().toString());
-//					System.out.println(time1.getSelectedItem().toString());
-					long day1=((userchosse.getTime() - date.getTime())/86400000);
-					long day2=((dt.getTime() - userchosse.getTime())/86400000);
-					Calendar calendar1 = Calendar.getInstance(); //得到日曆
-					Calendar calendar2 = Calendar.getInstance(); //得到日曆
-					calendar1.setTime(userchosse);//把當前時間賦给日曆
-//					calendar2.setTime();
-//					System.out.println(day2);
-//					System.out.println(calendar1.getTime());
-					if(combocount<=1){
-						for(int i=0;i<day;i++){
-							calendar1.add(Calendar.DAY_OF_MONTH, -1);
-							Date count = calendar1.getTime();
-							String tmp1 = sdf.format(count);
-							time2.removeItem(tmp1);
-							//---------------
-						}
-					}
-//					System.out.println(time2.getItemCount()-1);
-					if(combocount>1){
-						time2.removeAllItems();
-						Date count3 = calendar1.getTime();
-						String tmp12 = sdf.format(count3);
-						time2.addItem(tmp12);
-						for(int i=0;i<day2;i++){
-							
-							calendar1.add(Calendar.DAY_OF_MONTH, +1);
-							Date count = calendar1.getTime();
-							String tmp1 = sdf.format(count);
-//							System.out.println(tmp1);
-//							time2.addItem(tmp1);
-							int flag=0;
-							for(int j=0;j<day2;j++){
-								if(time2.getItemAt(j)==tmp1){
-									flag++;
+				   if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")){
+					   
+				   }else{
+					   try {
+							Date userchosse = sdf.parse(time1.getSelectedItem().toString());
+//							System.out.println(time1.getSelectedItem().toString());
+							long day1=((userchosse.getTime() - date.getTime())/86400000);
+							long day2=((dt.getTime() - userchosse.getTime())/86400000);
+							Calendar calendar1 = Calendar.getInstance(); //得到日曆
+							Calendar calendar2 = Calendar.getInstance(); //得到日曆
+							calendar1.setTime(userchosse);//把當前時間賦给日曆
+//							calendar2.setTime();
+//							System.out.println(day2);
+//							System.out.println(calendar1.getTime());
+							if(combocount<=1){
+								for(int i=0;i<day;i++){
+									calendar1.add(Calendar.DAY_OF_MONTH, -1);
+									Date count = calendar1.getTime();
+									String tmp1 = sdf.format(count);
+									time2.removeItem(tmp1);
+									//---------------
 								}
-							}if(flag==0){
-								time2.addItem(tmp1);
-								System.out.println(tmp1);
 							}
-						}
-//						for(int i=0;i<day2;i++){
-//							calendar1.add(Calendar.DAY_OF_MONTH, +1);
-//							Date count = calendar1.getTime();
-//							String tmp1 = sdf.format(count);
-//							System.out.println(tmp1);
-//							int qaq=0;
-//							for(int j=0;j<time2.getItemCount();j++){
-////								System.out.println(time2.getItemAt(j));
-//								if(tmp1==time2.getItemAt(j)){
-//									qaq++;
+//							System.out.println(time2.getItemCount()-1);
+							if(combocount>1){
+								if(time1.getItemAt(0).equals("日期")){
+									time1.removeItem("日期");
+								}
+								time2.removeAllItems();
+								time2.addItem("全部時間");
+								Date count3 = calendar1.getTime();
+								String tmp12 = sdf.format(count3);
+								time2.addItem(tmp12);
+								for(int i=0;i<day2;i++){
+									
+									calendar1.add(Calendar.DAY_OF_MONTH, +1);
+									Date count = calendar1.getTime();
+									String tmp1 = sdf.format(count);
+//									System.out.println(tmp1);
+//									time2.addItem(tmp1);
+									int flag=0;
+									for(int j=0;j<day2;j++){
+										if(time2.getItemAt(j)==tmp1){
+											flag++;
+										}
+									}if(flag==0){
+										time2.addItem(tmp1);
+										System.out.println(tmp1);
+									}
+								}
+//								for(int i=0;i<day2;i++){
+//									calendar1.add(Calendar.DAY_OF_MONTH, +1);
+//									Date count = calendar1.getTime();
+//									String tmp1 = sdf.format(count);
+//									System.out.println(tmp1);
+//									int qaq=0;
+//									for(int j=0;j<time2.getItemCount();j++){
+////										System.out.println(time2.getItemAt(j));
+//										if(tmp1==time2.getItemAt(j)){
+//											qaq++;
+//										}
+//									}
+//									if(qaq==0){
+//										time2.addItem(tmp1);
+//									}
+//										
+//									
 //								}
-//							}
-//							if(qaq==0){
-//								time2.addItem(tmp1);
-//							}
-//								
-//							
-//						}
-						
-					}
-					
-					combocount++;
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+								
+							}
+							
+							combocount++;
+						} catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				   }
+				   
 				   
 				   }
 				  });
@@ -307,8 +318,12 @@ public class BookHistory extends JFrame{
 //							tpd1[i-1] =rs.getObject(i);
 							tpd[i-1]=rs.getObject(i).toString();
 							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
-						}tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-					System.out.println("");
+						}
+//					System.out.println("");
+						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())
+								||tpd[1].equals(variety.getSelectedItem())||tpd[2].equals(variety.getSelectedIndex())){
+							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}
 					}
 					
 //					System.out.println(tdlist.size());
@@ -323,9 +338,8 @@ public class BookHistory extends JFrame{
 						tmp[i][5]=tdlist.get(i).Status();
 					}
 					
-					td=tmp;
 					bookSign = new String[]{"No.","類別","書名","作者","歸還日期","狀態"};
-					jtb1.setModel(new DefaultTableModel(td,bookSign));
+					jtb1.setModel(new DefaultTableModel(tmp,bookSign));
 				}
 				catch(Exception d){
 					d.printStackTrace();
