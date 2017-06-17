@@ -103,7 +103,6 @@ public class BookHistory extends JFrame{
 		variety.addItem("遺失");
 		variety.addItem("館藏中");
 		
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar(2011, 1-1, 1,0,0,0);
 		Date date = calendar.getTime();  
@@ -182,25 +181,6 @@ public class BookHistory extends JFrame{
 									}
 								}
 								
-//								for(int i=0;i<day2;i++){
-//									calendar1.add(Calendar.DAY_OF_MONTH, +1);
-//									Date count = calendar1.getTime();
-//									String tmp1 = sdf.format(count);
-//									System.out.println(tmp1);
-//									int qaq=0;
-//									for(int j=0;j<time2.getItemCount();j++){
-////										System.out.println(time2.getItemAt(j));
-//										if(tmp1==time2.getItemAt(j)){
-//											qaq++;
-//										}
-//									}
-//									if(qaq==0){
-//										time2.addItem(tmp1);
-//									}
-//										
-//									
-//								}
-								
 							}
 							
 							combocount++;
@@ -222,15 +202,16 @@ public class BookHistory extends JFrame{
 				 DBConnection("root","");
 			}
 		});
-		
 		//------------------------------------------
 		jmit1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent a) {
 //				System.out.println();
 				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+				String vrlist []= ElseFun();
+				float vtl [] =ElseFun2();
+				Date time;Date timeA = null;Date timeB = null;
 				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
-				Date time;Date timeA;Date timeB;
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
@@ -244,13 +225,23 @@ public class BookHistory extends JFrame{
 //							tpd1[i-1] =rs.getObject(i);
 							tpd[i-1]=rs.getObject(i).toString();
 							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
-							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}time=sdf.parse(tpd[4]);	
+						if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")
+								||time2.getSelectedItem().equals("日期")){
+							
+						}else{
+							timeA=sdf.parse(time1.getSelectedItem().toString());
+							timeB=sdf.parse(time2.getSelectedItem().toString());
 						}
-
-//						else if(){
-//							
-//						}
-					System.out.println("");
+						if(time1.getSelectedItem().equals("全部時間")){
+							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}else if(time.after(timeA)&&time.before(timeB)){
+							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}else{
+//							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+							System.out.println("找不到資訊1!!!!");
+							break;
+						}
 					}
 					
 //					System.out.println(tdlist.size());
@@ -265,25 +256,37 @@ public class BookHistory extends JFrame{
 						tmp[i][5]=tdlist.get(i).Status();
 					}
 					
+//					for(int i=0;i<tdlist.size();i++){
+//						if(tmp[i][1].equals("國文類")){
+//							a1++;
+//						}else if(tmp[i][1].equals("英文類")){
+//							a2++;
+//						}else if(tmp[i][1].equals("數學類")){
+//							a3++;
+//						}else if(tmp[i][1].equals("資訊類")){
+//							a4++;
+//						}else {
+//							a5++;
+//						}
+//					}
 					for(int i=0;i<tdlist.size();i++){
-						if(tmp[i][1].equals("國文類")){
-							a1++;
-//							System.out.println(a1);
-						}else if(tmp[i][1].equals("英文類")){
-							a2++;
-						}else if(tmp[i][1].equals("數學類")){
-							a3++;
-						}else if(tmp[i][1].equals("資訊類")){
-							a4++;
-						}else {
-							a5++;
+						for(int j=0;j<vrlist.length;j++){
+							if(tmp[i][1].equals(vrlist[j])){
+								vtl [j]++;
+							}
 						}
 					}
-					a1/=tdlist.size();a1*=100;
-					a2/=tdlist.size();a2*=100;
-					a3/=tdlist.size();a3*=100;
-					a4/=tdlist.size();a4*=100;
-					a5/=tdlist.size();a5*=100;
+//					a1/=tdlist.size();a1*=100;
+//					a2/=tdlist.size();a2*=100;
+//					a3/=tdlist.size();a3*=100;
+//					a4/=tdlist.size();a4*=100;
+//					a5/=tdlist.size();a5*=100;
+//					for(int i=0;i<vtl.length;i++){
+//						vtl[i]/=tdlist.size();
+//						vtl[i]*=100;
+//					}
+//					System.out.println(vtl.length);
+//					System.out.println(vrlist.length);
 //					System.out.println(a1);
 				}
 				
@@ -291,9 +294,10 @@ public class BookHistory extends JFrame{
 					d.printStackTrace();
 					//System.out.println("error:"+d.toString());
 				}
-				PieChart demo = new PieChart("Pie2", "What kind of book do you like?",a1,a2,a3,a4,a5);
+				PieChart demo = new PieChart("圓餅圖", "What kind of book do you like?",vrlist,vtl);
 	            demo.pack();  
 	            demo.setVisible(true);
+	            
 			}
 		});
 		
@@ -301,7 +305,73 @@ public class BookHistory extends JFrame{
 		jmit2.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent c) {
-				BarChart longchart1 = new BarChart("<使用者偏好>");  
+				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+				Date time;Date timeA = null;Date timeB = null;
+				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
+				String vrlist []= ElseFun();
+				float vtl1 [] =ElseFun2();
+				try{
+					DBConnection("root","");
+					Statement stmt = dbConn.createStatement();
+					String data2 = "SELECT * FROM test1";
+					ResultSet rs = stmt.executeQuery(data2);
+					ResultSetMetaData rm = rs.getMetaData();
+					int cnum = rm.getColumnCount();
+					
+					while(rs.next()){
+						for(int i=1; i<=cnum; i++){
+//							tpd1[i-1] =rs.getObject(i);
+							tpd[i-1]=rs.getObject(i).toString();
+							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+						}time=sdf.parse(tpd[4]);	
+						if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")
+								||time2.getSelectedItem().equals("日期")){
+							
+						}else{
+							timeA=sdf.parse(time1.getSelectedItem().toString());
+							timeB=sdf.parse(time2.getSelectedItem().toString());
+						}
+						if(time1.getSelectedItem().equals("全部時間")){
+							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}else if(time.after(timeA)&&time.before(timeB)){
+							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+						}else{
+//							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+							System.out.println("找不到資訊1!!!!");
+							break;
+						}
+//						else if(){
+//							
+//						}
+					System.out.println("");
+					}
+					String tmp [][]=new String [tdlist.size()][6];
+					for(int i=0;i<tdlist.size();i++){
+						tmp[i][0]=tdlist.get(i).retNum();
+						tmp[i][1]=tdlist.get(i).retVariety();
+						tmp[i][2]=tdlist.get(i).retBookName();
+						tmp[i][3]=tdlist.get(i).Author();
+						tmp[i][4]=tdlist.get(i).returnDate();
+						tmp[i][5]=tdlist.get(i).Status();
+					}
+					for(int i=0;i<tdlist.size();i++){
+						for(int j=0;j<vrlist.length;j++){
+							if(tmp[i][1].equals(vrlist[j])){
+								vtl1 [j]++;
+							}
+						}
+					}
+//					for(int i=0;i<vrlist.length;i++){
+//						System.out.println(vrlist[i]);
+//						System.out.println(vtl1[i]);
+//					}
+				}catch(Exception d){
+					d.printStackTrace();
+					//System.out.println("error:"+d.toString());
+				}
+				
+				//------------------------------------
+				BarChart longchart1 = new BarChart("<使用者偏好>", vrlist, vtl1);  
 				longchart1.pack();  
 				RefineryUtilities.centerFrameOnScreen(longchart1);  
 				longchart1.setVisible(true);  
@@ -320,14 +390,13 @@ public class BookHistory extends JFrame{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
 					
-					if(!variety.getSelectedItem().equals("全部")){
-						flag2="where '狀態'  = '" +variety.getSelectedItem().toString()+"'";
-					}else{
-						flag2="";
-					}
+//					if(!variety.getSelectedItem().equals("全部")){
+//						flag2="WHERE '狀態'  = '" +variety.getSelectedItem().toString()+"'";
+//					}else{
+//						flag2="";
+//					}
 //					System.out.println(flag2);
-					String data2 = "SELECT * FROM test1 "+flag2;
-					System.out.println(data2);
+					String data2 = "SELECT * FROM test1 ";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -336,7 +405,7 @@ public class BookHistory extends JFrame{
 						for(int i=1; i<=cnum; i++){
 //							tpd1[i-1] =rs.getObject(i);
 							tpd[i-1]=rs.getObject(i).toString();
-							//System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+//							System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
 						}
 						time=sdf.parse(tpd[4]);	
 						if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")
@@ -380,20 +449,38 @@ public class BookHistory extends JFrame{
 						//-------------------------------------
 						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
 							if(time1.getSelectedItem().equals("全部時間")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								if(tpd[5].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}
 							}else if(time.after(timeA)&&time.before(timeB)){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								if(tpd[5].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}
 							}else{
-								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+//								JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+								System.out.println("找不到資訊1!!!!");
 								break;
 							}
 						}else if(search.getText().equals("")){
 							if(time1.getSelectedItem().equals("全部時間")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-							}else if(time.after(timeA)&&time.before(timeB)){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								if(tpd[5].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}
+							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+								if(tpd[5].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+								}
 							}else{
-								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
+//								JOptionPane.showMessageDialog(null,"找不到資訊2!!!!");
+								System.out.println("找不到資訊2!!!!");
 								break;
 							}
 						}
@@ -506,6 +593,71 @@ public class BookHistory extends JFrame{
 
         //setDefaultCloseOperation();
     }
+	private String[] ElseFun(){
+		String ans = null;
+		String[] tpd = new String [6];
+		String wtf [] = null;
+		String tdtd = null;
+		ArrayList<VarietyList>vrlist=new ArrayList<VarietyList>();
+		ArrayList<TableDataList>tdlist1=new ArrayList<TableDataList>();
+		try{
+			DBConnection("root","");
+			Statement stmt = dbConn.createStatement();
+			String data2 = "SELECT * FROM  test1 ";
+			ResultSet rs = stmt.executeQuery(data2);
+			ResultSetMetaData rm = rs.getMetaData();
+			int cnum = rm.getColumnCount();
+			while(rs.next()){
+				for(int i=1; i<=cnum; i++){
+//					tpd1[i-1] =rs.getObject(i);
+					tpd[i-1]=rs.getObject(i).toString();
+//					System.out.println(rm.getColumnName(i)+":"+rs.getObject(i)+" ");
+					}tdlist1.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
+					
+				}
+			String tmp [][]=new String [tdlist1.size()][6];
+			for(int i=0;i<tdlist1.size();i++){
+				tmp[i][0]=tdlist1.get(i).retNum();
+				tmp[i][1]=tdlist1.get(i).retVariety();
+				tmp[i][2]=tdlist1.get(i).retBookName();
+				tmp[i][3]=tdlist1.get(i).Author();
+				tmp[i][4]=tdlist1.get(i).returnDate();
+				tmp[i][5]=tdlist1.get(i).Status();
+				vrlist.add(new VarietyList(tmp[i][1]));
+			}
+//			System.out.println(tdlist1.size());
+			
+			
+			for(int i=0;i<vrlist.size();i++){
+				for(int j=0;j<vrlist.size();j++){
+					if(j!=i){
+						if(vrlist.get(i).retVariety().equals(vrlist.get(j).retVariety())){
+							vrlist.remove(j);
+						}
+					}
+				}
+			}
+
+			 wtf= new String[vrlist.size()];
+			for(int i=0;i<vrlist.size();i++){
+//				System.out.println(tdlist1.get(i).retVariety());
+				wtf[i]=vrlist.get(i).retVariety();
+//				System.out.println(vrlist.get(i).retVariety());
+			}
+		}catch(Exception fun1){
+			fun1.printStackTrace();
+		}
+		
+		return wtf;
+	}
+	private float[] ElseFun2(){
+		String tmp [] =ElseFun();
+		float vtl []= new float [tmp.length];
+		for(int i=0;i<vtl.length;i++){
+			vtl[i]=0;
+		}
+		return vtl;
+	}
 	
 
 }

@@ -17,18 +17,23 @@ public class PieChart extends JFrame{
 	private float v4;
 	private float v5;
 	private DefaultPieDataset result;
-	public enum Library{
-		Chinese("Chinese"),Math("Math"),English("English"),
-		Info("Information"),Else("Else")
-		;
-		private String msg; 
-		private Library(String msg){
-			this.msg=msg;
-			}
-	}
-	public PieChart(String applicationTitle,String ChartTitle,float v1,float v2,float v3,float v4,float v5){
+//	public enum Library{
+//		Chinese("Chinese"),Math("Math"),English("English"),
+//		Info("Information"),Else("Else")
+//		;
+//		private String msg; 
+//		private Library(String msg){
+//			this.msg=msg;
+//			}
+//	}
+	public PieChart(String applicationTitle,String ChartTitle,String[] vrlist,float[] vtl){
 		super(applicationTitle);
-		PieDataset dataset = creatDataset(v1,v2,v3,v4,v5);
+//		System.out.println(vrlist.length);
+//		for(int i=0;i<vrlist.length;i++){
+//			System.out.println(vrlist[i]);
+//			System.out.println(vtl[i]);
+//		}
+		PieDataset dataset = creatDataset(vrlist,vtl);
 		JFreeChart chart =creatChart(dataset,ChartTitle);
 		ChartPanel chartPanel = new ChartPanel(chart);
 		chartPanel.setPreferredSize(new java.awt.Dimension(700, 300));
@@ -36,13 +41,14 @@ public class PieChart extends JFrame{
 		setDefaultCloseOperation(PieChart.DISPOSE_ON_CLOSE);
 	}
 
-	private PieDataset creatDataset(float v1,float v2,float v3,float v4,float v5){
+
+	
+
+	private PieDataset creatDataset( String[] vrlist, float[] vtl){
 		result= new DefaultPieDataset();
-		result.setValue(Library.Chinese, v1);
-		result.setValue(Library.English, v2);
-		result.setValue(Library.Math, v3);
-		result.setValue(Library.Info, v4);
-		result.setValue(Library.Else, v5);
+		for(int i=0;i<vrlist.length;i++){
+			result.setValue(vrlist[i],vtl[i]);
+		}
 		return result;
 	}
 	private JFreeChart createChart(PieDataset dataset, String title) {          

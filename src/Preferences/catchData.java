@@ -133,3 +133,13 @@ class TableDataList{
 		System.out.println(this.status);
 	}
 }
+
+class VarietyList{
+	private String variety;
+	public VarietyList(String variety){
+		this.variety=variety;
+	}
+	public String retVariety(){
+		return this.variety;
+	}
+}
