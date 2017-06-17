@@ -235,7 +235,7 @@ public class BookHistory extends JFrame{
 						}
 						if(time1.getSelectedItem().equals("全部時間")){
 							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-						}else if(time.after(timeA)&&time.before(timeB)){
+						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
 							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
 						}else{
 //							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
@@ -255,20 +255,7 @@ public class BookHistory extends JFrame{
 						tmp[i][4]=tdlist.get(i).returnDate();
 						tmp[i][5]=tdlist.get(i).Status();
 					}
-					
-//					for(int i=0;i<tdlist.size();i++){
-//						if(tmp[i][1].equals("國文類")){
-//							a1++;
-//						}else if(tmp[i][1].equals("英文類")){
-//							a2++;
-//						}else if(tmp[i][1].equals("數學類")){
-//							a3++;
-//						}else if(tmp[i][1].equals("資訊類")){
-//							a4++;
-//						}else {
-//							a5++;
-//						}
-//					}
+
 					for(int i=0;i<tdlist.size();i++){
 						for(int j=0;j<vrlist.length;j++){
 							if(tmp[i][1].equals(vrlist[j])){
@@ -276,18 +263,7 @@ public class BookHistory extends JFrame{
 							}
 						}
 					}
-//					a1/=tdlist.size();a1*=100;
-//					a2/=tdlist.size();a2*=100;
-//					a3/=tdlist.size();a3*=100;
-//					a4/=tdlist.size();a4*=100;
-//					a5/=tdlist.size();a5*=100;
-//					for(int i=0;i<vtl.length;i++){
-//						vtl[i]/=tdlist.size();
-//						vtl[i]*=100;
-//					}
-//					System.out.println(vtl.length);
-//					System.out.println(vrlist.length);
-//					System.out.println(a1);
+
 				}
 				
 				catch(Exception d){
@@ -333,7 +309,7 @@ public class BookHistory extends JFrame{
 						}
 						if(time1.getSelectedItem().equals("全部時間")){
 							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-						}else if(time.after(timeA)&&time.before(timeB)){
+						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
 							tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
 						}else{
 //							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
@@ -390,12 +366,6 @@ public class BookHistory extends JFrame{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
 					
-//					if(!variety.getSelectedItem().equals("全部")){
-//						flag2="WHERE '狀態'  = '" +variety.getSelectedItem().toString()+"'";
-//					}else{
-//						flag2="";
-//					}
-//					System.out.println(flag2);
 					String data2 = "SELECT * FROM test1 ";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
@@ -421,30 +391,6 @@ public class BookHistory extends JFrame{
 						 * 外圈if是時間比較
 						 * 內圈是輸入文字條件比較
 						 */
-//						if(time1.getSelectedItem().equals("全部時間")){
-//							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else if(variety.getSelectedItem().equals("全部")){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else {
-//								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
-//							}
-//							
-//						}else if(time1.getSelectedItem().equals("日期")){
-//							JOptionPane.showMessageDialog(null,"請選擇時間!!!!");
-//							break;
-//						}
-//						
-//						else if(time.after(timeA)&&time.before(timeB)){
-//							
-//							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else if(variety.getSelectedItem().equals("全部")){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else {
-//								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
-//							}
-//						}
 						 	
 						//-------------------------------------
 						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
@@ -485,20 +431,6 @@ public class BookHistory extends JFrame{
 							}
 						}
 						
-						
-						
-						
-						//-------------------------------------
-//						else if(time.after(timeA)&&time2.getSelectedItem().equals("至今")){
-//							if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else if(variety.getSelectedItem().equals("全部")){
-//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5]));
-//							}else {
-//								JOptionPane.showMessageDialog(null,"找不到資訊!!!!");
-//							}
-//						}
-//					System.out.println("");
 					}//------------while end---------------------------
 					
 //					System.out.println(tdlist.size());
@@ -552,19 +484,6 @@ public class BookHistory extends JFrame{
 	 */
 	private void JShowData(String td [][]) {
 		
-//		String count [] = new String [datacount];
-//		for(int i=0;i<datacount;i++){
-//			String tmp = Integer.toString(i+1);
-//			 count [i] = tmp+".";
-//		}
-//		String td1 [][]= new String[datacount][6];
-//		for(int j=0;j<datacount;j++){
-//			 for(int x=1;x<6;x++){
-//				 td1[j][0]=count[j];
-//				 td1[j][x]=td[j][x-1];
-//			 }
-//		 }
-//		
         tableData = td;
         bookSign = new String[]{"No.","類別","書名","作者","歸還日期","狀態"};
         tmodel = new DefaultTableModel(tableData,bookSign); //建立表格
