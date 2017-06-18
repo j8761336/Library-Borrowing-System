@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -26,7 +28,7 @@ class Userdata extends JFrame {
 	private String jlbname[] = { "帳號:", "姓名:", "系級:", "生日:", "email:", "電話:" };
 	private JLabel jlb[] = new JLabel[6];
 	private JLabel datajlb[] = new JLabel[6];
-	private JButton jbtn = new JButton("更改密碼");
+	private JButton jbtn = new JButton("修改資料");
 	private JPanel jlbjpl = new JPanel(new GridLayout(6, 1, 3, 3));
 	private JPanel datajlbjpl = new JPanel(new GridLayout(6, 1, 3, 3));
 	private Container cp;
@@ -76,8 +78,6 @@ class Userdata extends JFrame {
 		GridBagConstraints g = new GridBagConstraints();
 		g.fill = GridBagConstraints.NONE;
 		g.anchor = GridBagConstraints.WEST;
-		// g.gridwidth = 1;
-		// g.gridheight = 1;
 		g.weightx = 1;
 		g.weighty = 1;
 		g.gridx = 0;
@@ -95,7 +95,6 @@ class Userdata extends JFrame {
 		cp.add(jlbjpl, g);
 		g.fill = GridBagConstraints.BOTH;
 		g.gridwidth = 2;
-		// g.gridheight = 1;
 		g.weightx = 1;
 		g.weighty = 1;
 		g.gridx = 1;
@@ -111,15 +110,24 @@ class Userdata extends JFrame {
 			colCount = meta.getColumnCount();
 			while (rs.next()) {
 				for (int i = 0; i < colCount - 2; i++) {
-					datajlb[i].setText(rs.getString(i + 2));
-
+					if (i == 0) {
+						datajlb[i].setText(rs.getString(1));
+					} else {
+						datajlb[i].setText(rs.getString(i + 2));
+					}
 				}
-
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "無法顯示資料");
 
 		}
+		jbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int a = 1;
+				ReviseData re = new ReviseData(Id, a);
+			}
+
+		});
 
 	}
 
