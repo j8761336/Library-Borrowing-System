@@ -30,6 +30,7 @@ public class BookHistory extends JFrame{
 	private String driver = "com.mysql.jdbc.Driver";
 	private String url ="jdbc:mysql://127.0.0.1:3306/test?";	
 	private Connection dbConn;
+	private String tablechoose ="test2";
 	
 	private JTextField search = new JTextField();
 	private JButton doSearch = new JButton("search");
@@ -208,14 +209,16 @@ public class BookHistory extends JFrame{
 			public void actionPerformed(ActionEvent a) {
 //				System.out.println();
 				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
+				
 				String vrlist []= ElseFun();
 				float vtl [] =ElseFun2();
+				
 				Date time;Date timeA = null;Date timeB = null;
 				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					String data2 = "SELECT * FROM op";
+					String data2 = "SELECT * FROM "+tablechoose;
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -243,26 +246,86 @@ public class BookHistory extends JFrame{
 							timeA=sdf.parse(time1.getSelectedItem().toString());
 							timeB=sdf.parse(time2.getSelectedItem().toString());
 						}
-						if(time1.getSelectedItem().equals("全部時間")){
-							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if(time.after(timeA)&&time.before(timeB)){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
 							}else{
+//								JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+								System.out.println("找不到資訊1!!!!");
+								break;
+							}
+						}else if(search.getText().equals("")&&!variety.getSelectedItem().equals("查詢使用者記錄")){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else{
+//								JOptionPane.showMessageDialog(null,"找不到資訊2!!!!");
+								System.out.println("找不到資訊2!!!!");
+								break;
+							}
+						}else if(variety.getSelectedItem().equals("查詢使用者記錄")){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[0].equals(search.getText())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(search.getText().equals("")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+								if(tpd[0].equals(search.getText())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(search.getText().equals("")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else{
+//									JOptionPane.showMessageDialog(null,"找不到資訊2!!!!");
+									System.out.println("找不到資訊2!!!!");
+									break;
+								}
 							}
 							
-						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
-							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else{
-							}
-						}else{
-//							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
-							System.out.println("找不到資訊1!!!!");
-							break;
+							
 						}
+						
+						
+						
+//						if(time1.getSelectedItem().equals("全部時間")){
+//							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else if(!variety.getSelectedItem().equals("查詢使用者記錄")){
+//							}
+//							
+//						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+//							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else{
+//							}
+//						}else{
+////							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+//							System.out.println("找不到資訊1!!!!");
+//							break;
+//						}
 					}
 					
 //					System.out.println(tdlist.size());
@@ -277,14 +340,16 @@ public class BookHistory extends JFrame{
 						tmp[i][5]=tdlist.get(i).returnDate();
 						tmp[i][6]=tdlist.get(i).Status();
 					}
-
+					System.out.println("1");
+					System.out.println(tdlist.size());
 					for(int i=0;i<tdlist.size();i++){
 						for(int j=0;j<vrlist.length;j++){
 							if(tmp[i][1].equals(vrlist[j])){
 								vtl [j]++;
+								System.out.println(vtl[i]);
 							}
 						}
-					}
+					}System.out.println("2");
 
 				}
 				
@@ -312,7 +377,7 @@ public class BookHistory extends JFrame{
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					String data2 = "SELECT * FROM op";
+					String data2 = "SELECT * FROM "+tablechoose;
 					
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
@@ -333,26 +398,86 @@ public class BookHistory extends JFrame{
 							timeA=sdf.parse(time1.getSelectedItem().toString());
 							timeB=sdf.parse(time2.getSelectedItem().toString());
 						}
-						if(time1.getSelectedItem().equals("全部時間")){
-							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+						
+						
+						
+						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if(time.after(timeA)&&time.before(timeB)){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
 							}else{
+//								JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+								System.out.println("找不到資訊1!!!!");
+								break;
+							}
+						}else if(search.getText().equals("")&&!variety.getSelectedItem().equals("查詢使用者記錄")){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+								if(tpd[6].equals(variety.getSelectedItem().toString())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(variety.getSelectedItem().equals("全部")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else{
+//								JOptionPane.showMessageDialog(null,"找不到資訊2!!!!");
+								System.out.println("找不到資訊2!!!!");
+								break;
+							}
+						}else if(variety.getSelectedItem().equals("查詢使用者記錄")){
+							if(time1.getSelectedItem().equals("全部時間")){
+								if(tpd[0].equals(search.getText())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(search.getText().equals("")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}
+							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+								if(tpd[0].equals(search.getText())){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else if(search.getText().equals("")){
+									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+								}else{
+//									JOptionPane.showMessageDialog(null,"找不到資訊2!!!!");
+									System.out.println("找不到資訊2!!!!");
+									break;
+								}
 							}
 							
-						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
-							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
-								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-							}else{
-							}
-						}else{
-//							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
-							System.out.println("找不到資訊1!!!!");
-							break;
+							
 						}
+//						if(time1.getSelectedItem().equals("全部時間")){
+//							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else{
+//							}
+//							
+//						}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+//							if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals(tpd[0])){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else if(variety.getSelectedItem().equals("查詢使用者記錄")&&search.getText().equals("")){
+//								tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
+//							}else{
+//							}
+//						}else{
+////							JOptionPane.showMessageDialog(null,"找不到資訊1!!!!");
+//							System.out.println("找不到資訊1!!!!");
+//							break;
+//						}
 //						else if(){
 //							
 //						}
@@ -403,7 +528,7 @@ public class BookHistory extends JFrame{
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					String data2 = "SELECT * FROM op";
+					String data2 = "SELECT * FROM "+tablechoose;
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -497,6 +622,7 @@ public class BookHistory extends JFrame{
 						tmp[i][4]=tdlist.get(i).rentDate();
 						tmp[i][5]=tdlist.get(i).returnDate();
 						tmp[i][6]=tdlist.get(i).Status();
+//						tdlist.get(i).showInfo();
 					}
 					
 					bookSign = new String[]{"使用者ID","類別","書名","書籍編號","借閱日期","歸還日期","狀態"};
@@ -576,7 +702,7 @@ public class BookHistory extends JFrame{
 		try{
 			DBConnection("root","");
 			Statement stmt = dbConn.createStatement();
-			String data2 = "SELECT * FROM  test2 ";
+			String data2 = "SELECT * FROM  "+tablechoose;
 			ResultSet rs = stmt.executeQuery(data2);
 			ResultSetMetaData rm = rs.getMetaData();
 			int cnum = rm.getColumnCount();
