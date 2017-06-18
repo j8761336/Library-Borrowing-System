@@ -398,7 +398,7 @@ public class UserHistory extends JFrame{
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					data2 = "SELECT * FROM op";
+					data2 = "SELECT * FROM bookpreemption";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -562,7 +562,7 @@ public class UserHistory extends JFrame{
 		try{
 			DBConnection("root","");
 			Statement stmt = dbConn.createStatement();
-			String data2 = "SELECT * FROM  test2 ";
+			String data2 = "SELECT * FROM  bookpreemption ";
 			ResultSet rs = stmt.executeQuery(data2);
 			ResultSetMetaData rm = rs.getMetaData();
 			int cnum = rm.getColumnCount();

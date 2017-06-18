@@ -55,7 +55,7 @@ public class Returnbook extends JFrame {
 				
 				try{DBConnection("root","");
 				Statement stmt= dbConn.createStatement();
-				String data="SELECT*FROM op WHERE bookid="+bookid.getText();
+				String data="SELECT*FROM bookpreemption WHERE bookid="+bookid.getText();
 				ResultSet rs=stmt.executeQuery(data);
 				ResultSetMetaData rm=(ResultSetMetaData) rs.getMetaData();
 				int co=rm.getColumnCount();
@@ -81,7 +81,7 @@ public class Returnbook extends JFrame {
 					Calendar cl=Calendar.getInstance();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				    System.out.println(sdf.format(cl.getTime()));
-				    String data="INSERT op(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
+				    String data="INSERT bookpreemption(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
 							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+sdf.format(cl.getTime())+"','"+"已歸還"+"')";
 					stmt.executeUpdate(data);
 				} catch (SQLException e1) {

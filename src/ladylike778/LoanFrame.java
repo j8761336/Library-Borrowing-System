@@ -58,7 +58,7 @@ public class LoanFrame extends JFrame {
 				
 				try{DBConnection("root","");
 				Statement stmt= dbConn.createStatement();
-				String data="SELECT*FROM test1 WHERE bookid="+bookid.getText();
+				String data="SELECT*FROM bookmanagement WHERE bookid="+bookid.getText();
 				ResultSet rs=stmt.executeQuery(data);
 				ResultSetMetaData rm=(ResultSetMetaData) rs.getMetaData();
 				int co=rm.getColumnCount();
@@ -88,7 +88,7 @@ public class LoanFrame extends JFrame {
 					cal.add(Calendar.DAY_OF_MONTH,+7);
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				    System.out.println(sdf.format(cl.getTime()));
-					String data="INSERT op(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
+					String data="INSERT bookpreemption(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
 							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+"未知"+"','"+"借閱中"+"')";
 					stmt.executeUpdate(data);
 				} catch (SQLException e1) {
