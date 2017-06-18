@@ -109,7 +109,7 @@ public class ReviseData extends JFrame {
 			DBConnection sql = new DBConnection();
 			dbConn = sql.getConn();
 			queryStmt = (Statement) dbConn.createStatement();
-			rs = queryStmt.executeQuery("select*from userdata where account=" + account + "");
+			rs = queryStmt.executeQuery("select*from usermanagement where userid=" + account + "");
 			int colCount;
 			meta = rs.getMetaData();
 			colCount = meta.getColumnCount();
