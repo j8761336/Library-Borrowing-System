@@ -42,8 +42,7 @@ public class SystemUser extends JFrame {
 	//
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// systemframe sf = new systemframe();
-		// sf.setVisible(true);
+
 		SystemUser su = new SystemUser();
 		su.setVisible(true);
 	}
@@ -53,10 +52,6 @@ public class SystemUser extends JFrame {
 	private JButton deljbtn = new JButton("刪除");
 	private String jlbstr[] = { "帳號", "密碼", "姓名", "系級", "生日", "email", "電話", "權限", "刪除" };
 	private JLabel jlb[] = new JLabel[9];
-	// private JLabel accjlb = new JLabel("帳號");
-	// private JLabel namejlb = new JLabel("姓名");
-	// private JLabel datejlb = new JLabel("日期");
-	// private JLabel condijlb = new JLabel("狀態");
 
 	private JScrollPane datajsp;
 	private JPanel funcjpl = new JPanel(new GridLayout(4, 1, 5, 20));
@@ -102,9 +97,6 @@ public class SystemUser extends JFrame {
 		// 使儲存格不可移動
 		table.setFont(new Font(null, Font.PLAIN, 16));
 
-		// deljpgjbtn.setPreferredSize(new Dimension(30,30));
-		// deljpgjbtn.setIcon(icon);
-		// deljpgjbtn.setSize(50, 50);
 		funcjpl.add(addjbtn);
 		funcjpl.add(revjbtn);
 		funcjpl.add(deljbtn);
@@ -124,7 +116,6 @@ public class SystemUser extends JFrame {
 		gbc.insets = new Insets(20, 20, 0, 0);
 		cp.add(mainjlb, gbc);
 		gbc.fill = GridBagConstraints.BOTH;
-		// gbc.gridheight = 2;
 		gbc.weightx = 1;
 		gbc.weighty = 1;
 		gbc.gridwidth = 1;
@@ -198,12 +189,8 @@ public class SystemUser extends JFrame {
 					vc.addElement(rs.getString(i + 1));
 				}
 
-				// vc.addElement(deljpl[a]);
-				// a++;
 				model.addRow(vc);
-				// table.setModel(model);
 				table.setCellSelectionEnabled(true);
-				datajsp.setBackground(Color.PINK);
 
 			}
 
@@ -241,20 +228,8 @@ public class SystemUser extends JFrame {
 			table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
 			table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
 
-			// int[] ar = table.getSelectedRow();
-			// for (int i = 0; i < ar.length; i++) {
-			// boolean v = (boolean) model.getValueAt(ar[i], 0);
-			//
-			//// model.removeRow(ar[i]);
-			//
-			// System.out.println(ar[i] + " ");
-			// }
-			// System.out.println(ar);
-			// String c=(String) model.getValueAt(2,7);
-			// System.out.println(c);
-
 		} catch (SQLException e) {
-
+			JOptionPane.showMessageDialog(null, "資料庫出錯");
 		}
 
 		addjbtn.addActionListener(new ActionListener() {
@@ -276,6 +251,7 @@ public class SystemUser extends JFrame {
 				table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(70);
 				table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(50);
 				deljbtn2.setVisible(true);
+				revjbtn2.setVisible(false);
 				deljbtn2.setFont(f1);
 				deljbtn2.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -306,15 +282,17 @@ public class SystemUser extends JFrame {
 				table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(70);
 				table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(50);
 				revjbtn2.setVisible(true);
+				deljbtn2.setVisible(false);
 				revjbtn2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
+
 						int row[] = table.getSelectedRows();
 						for (int i = 0; i < row.length; i++) {
 							String str = (String) model.getValueAt(row[i], 0);
-							// ReviseData rd = new ReviseData(str);
-							// rd.setVisible(true);
+							ReviseData rd = new ReviseData(str, 0);
+							rd.setVisible(true);
 						}
 					}
 				});
