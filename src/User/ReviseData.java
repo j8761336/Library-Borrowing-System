@@ -39,9 +39,12 @@ public class ReviseData extends JFrame {
 	private ResultSet rs;
 	private Statement queryStmt;
 	private ResultSetMetaData meta;
+	private int set;
 
-	public ReviseData(String str) {
+	public ReviseData(String str, int a) {
 		account = str;
+		set = a;
+		setVisible(true);
 		init();
 	}
 
@@ -51,6 +54,11 @@ public class ReviseData extends JFrame {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		this.setTitle("修改資料");
+		if (set == 1) {
+			jlb[7].setVisible(false);
+			jlb2[7].setVisible(false);
+			jbts[7].setVisible(false);
+		}
 		for (int i = 0; i < 8; i++) {
 			jlb[i] = new JLabel(jlbname[i]);
 			jlbjpl.add(jlb[i]);
