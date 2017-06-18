@@ -26,7 +26,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class BookHistory extends JFrame{
+public class UserHistory extends JFrame{
 	private String driver = "com.mysql.jdbc.Driver";
 	private String url ="jdbc:mysql://127.0.0.1:3306/test?";	
 	private Connection dbConn;
@@ -55,12 +55,12 @@ public class BookHistory extends JFrame{
 	private JTable jtb1 ;
 	
 	private String td[][]; 
-	
+	String userid;
 	private char user;
-	public BookHistory(){
+	public UserHistory(String userid){
 		JShowData(td);
 		init();
-		
+		this.userid=userid;
 	}
 	
 
@@ -85,9 +85,9 @@ public class BookHistory extends JFrame{
 		pel1.add(time1);pel1.add(time2);
 		pel1.add(variety);pel1.add(search);pel1.add(doSearch);
 
-		jbr1.add(jm1);jbr1.add(jm2);
-		jm1.add(jmit1);jm1.add(jmit2); 
-		jm2.add(jmuDBConn);
+//		jbr1.add(jm1);jbr1.add(jm2);
+//		jm1.add(jmit1);jm1.add(jmit2);
+//		jm2.add(jmuDBConn);
 		
 		time1.setBorder(BorderFactory.createTitledBorder("從"));
 		time2.setBorder(BorderFactory.createTitledBorder("到"));
@@ -102,7 +102,7 @@ public class BookHistory extends JFrame{
 		variety.addItem("已歸還");
 		variety.addItem("遺失");
 		variety.addItem("館藏中");
-		variety.addItem("查詢使用者記錄");
+//		variety.addItem("查詢使用者記錄");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar(2011, 1-1, 1,0,0,0);
 		Date date = calendar.getTime();  
@@ -425,14 +425,14 @@ public class BookHistory extends JFrame{
 						 */
 						 	
 						//-------------------------------------
-						if(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText())){
+						if(tpd[0].equals(userid)&&(tpd[1].equals(search.getText())||tpd[2].equals(search.getText())||tpd[3].equals(search.getText()))){
 							if(time1.getSelectedItem().equals("全部時間")){
 								if(tpd[6].equals(variety.getSelectedItem().toString())){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}else if(variety.getSelectedItem().equals("全部")){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}
-							}else if(time.after(timeA)&&time.before(timeB)){
+							}else if(tpd[0].equals(userid)&&time.after(timeA)&&time.before(timeB)){
 								if(tpd[6].equals(variety.getSelectedItem().toString())){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}else if(variety.getSelectedItem().equals("全部")){
@@ -443,14 +443,14 @@ public class BookHistory extends JFrame{
 								System.out.println("找不到資訊1!!!!");
 								break;
 							}
-						}else if(search.getText().equals("")&&!variety.getSelectedItem().equals("查詢使用者記錄")){
+						}else if(search.getText().equals("")&&tpd[0].equals(userid)){
 							if(time1.getSelectedItem().equals("全部時間")){
 								if(tpd[6].equals(variety.getSelectedItem().toString())){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}else if(variety.getSelectedItem().equals("全部")){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}
-							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
+							}else if(tpd[0].equals(userid)&&((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB)))){
 								if(tpd[6].equals(variety.getSelectedItem().toString())){
 									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
 								}else if(variety.getSelectedItem().equals("全部")){
@@ -461,22 +461,6 @@ public class BookHistory extends JFrame{
 								System.out.println("找不到資訊2!!!!");
 								break;
 							}
-						}else if(variety.getSelectedItem().equals("查詢使用者記錄")){
-							if(time1.getSelectedItem().equals("全部時間")){
-								if(tpd[0].equals(search.getText())){
-									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-								}else if(search.getText().equals("")){
-									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-								}
-							}else if((time.after(timeA)||time.equals(timeA))&&(time.before(timeB)||time.equals(timeB))){
-								if(tpd[0].equals(search.getText())){
-									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-								}else if(search.getText().equals("")){
-									tdlist.add(new TableDataList(tpd[0],tpd[1],tpd[2],tpd[3],tpd[4],tpd[5],tpd[6]));
-								}
-							}
-							
-							
 						}
 						
 					}//------------while end---------------------------

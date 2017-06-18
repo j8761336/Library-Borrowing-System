@@ -14,7 +14,7 @@ public class catchData {
 		return this.tmpData;
 	}
 	public void addList(String tmpData[]){
-		tdlist.add(new TableDataList(tmpData[0],tmpData[1],tmpData[2],tmpData[3],tmpData[4],tmpData[5]));
+//		tdlist.add(new TableDataList(tmpData[0],tmpData[1],tmpData[2],tmpData[3],tmpData[4],tmpData[5]));
 		
 	}
 	public int getSize(){
@@ -88,12 +88,12 @@ class TableDataList{
 	private String author;
 	private String returnDate;
 	private String status;
+	private String rentDate;
 	private int test1;
-	public TableDataList(String num,String variety,String bookName,String author,
+	public TableDataList(String num,String variety,String bookName,String author,String rentDate,
 			String returnDate,String status){
 		this.num=num;this.variety=variety;this.bookName=bookName;
-		this.author=author;this.returnDate=returnDate;this.status=status;this.test1=1;
-		
+		this.author=author;this.rentDate=rentDate;this.returnDate=returnDate;this.status=status;this.test1=1;
 	}
 	
 //	public int retTest(){
@@ -116,6 +116,9 @@ class TableDataList{
 		
 		return this.author;
 	}
+	public String rentDate(){
+		return this.rentDate;
+	}
 	public String returnDate(){
 		
 		return this.returnDate;
@@ -131,5 +134,15 @@ class TableDataList{
 		System.out.println(this.author);
 		System.out.println(this.returnDate);
 		System.out.println(this.status);
+	}
+}
+
+class VarietyList{
+	private String variety;
+	public VarietyList(String variety){
+		this.variety=variety;
+	}
+	public String retVariety(){
+		return this.variety;
 	}
 }
