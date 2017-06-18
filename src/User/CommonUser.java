@@ -24,28 +24,12 @@ import dandan.DBConnection;
 
 import java.sql.Statement;
 
-//public class CommonUser extends JFrame {
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//
-//		addUser aU = new addUser();
-//		aU.setVisible(true);
-//	}
-//}
 
 class CommonUser extends JFrame {
 	private String jblname[] = { "帳號:", "輸入密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:", "權限:" };
 	private JLabel jbl[] = new JLabel[9];
 
 	private JButton subjbtn = new JButton("送出");
-	// private JTextField accjtf = new JTextField();
-	// private JTextField passjtf = new JTextField();
-	// private JTextField passagainjtf = new JTextField();
-	// private JTextField namejtf = new JTextField();
-	// private JTextField birthjtf = new JTextField();
-	// private JTextField phonejtf = new JTextField();
-	// private JTextField emailjtf = new JTextField();
-	// private JTextField subjectjtf = new JTextField();
 	private JTextField jtf[] = new JTextField[9];
 	private JPanel jlbjpl = new JPanel(new GridLayout(9, 1, 3, 3));
 	private JPanel jtfjpl = new JPanel(new GridLayout(9, 1, 3, 3));
@@ -136,3 +120,4 @@ class CommonUser extends JFrame {
 	}
 
 }
+
