@@ -260,7 +260,7 @@ public class SystemUser extends JFrame {
 							String str = (String) model.getValueAt(row[i], 0);
 							model.removeRow(row[i]);
 							try {
-								queryStmt.executeUpdate("delete from userdata where account=" + str + "");
+								queryStmt.executeUpdate("delete from usermanagement where userid=" + str + "");
 							} catch (SQLException e1) {
 								JOptionPane.showMessageDialog(null, "資料庫出錯");
 							}
