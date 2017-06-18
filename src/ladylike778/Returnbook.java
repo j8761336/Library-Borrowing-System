@@ -84,6 +84,8 @@ public class Returnbook extends JFrame {
 				    String data="INSERT bookpreemption(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
 							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+sdf.format(cl.getTime())+"','"+"已歸還"+"')";
 					stmt.executeUpdate(data);
+					String data2="UPDATE bookmanagement SET status='館藏'WHERE bookid="+bookid.getText();
+					stmt.executeUpdate(data2);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();}
