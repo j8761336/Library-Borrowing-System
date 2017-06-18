@@ -132,6 +132,7 @@ class TableDataList{
 		System.out.println(this.variety);
 		System.out.println(this.bookName);
 		System.out.println(this.author);
+		System.out.println(this.rentDate);
 		System.out.println(this.returnDate);
 		System.out.println(this.status);
 	}
