@@ -132,7 +132,7 @@ class Userdata extends JFrame {
 	}
 
 	private ResultSet getData() {
-		String sqlStr = "select*from Userdata where account=" + Id + "&&" + "Password=" + Pass + "";
+		String sqlStr = "select*from usermanagement where userid=" + Id + "&&" + "Password=" + Pass + "";
 		try {
 			queryStmt = (Statement) dbConn.createStatement();
 			rs = queryStmt.executeQuery(sqlStr);
