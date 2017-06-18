@@ -215,7 +215,7 @@ public class BookHistory extends JFrame{
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					String data2 = "SELECT * FROM test2";
+					String data2 = "SELECT * FROM op";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -235,6 +235,9 @@ public class BookHistory extends JFrame{
 						
 						if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")
 								||time2.getSelectedItem().equals("日期")){
+							if(time1.getSelectedItem().equals("日期")){
+								JOptionPane.showMessageDialog(null,"請選擇日期RRRRRR!!");
+							}
 							
 						}else{
 							timeA=sdf.parse(time1.getSelectedItem().toString());
@@ -304,12 +307,12 @@ public class BookHistory extends JFrame{
 				Date time;Date timeA = null;Date timeB = null;
 				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
 				String vrlist []= ElseFun();
-				String data2=null;
+
 				float vtl1 [] =ElseFun2();
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					data2 = "SELECT * FROM test2";
+					String data2 = "SELECT * FROM op";
 					
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
@@ -323,7 +326,9 @@ public class BookHistory extends JFrame{
 						}time=sdf.parse(tpd[4]);	
 						if(time1.getSelectedItem().equals("日期")||time1.getSelectedItem().equals("全部時間")
 								||time2.getSelectedItem().equals("日期")){
-							
+							if(time1.getSelectedItem().equals("日期")){
+								JOptionPane.showMessageDialog(null,"請選擇日期RRRRRR!!");
+							}
 						}else{
 							timeA=sdf.parse(time1.getSelectedItem().toString());
 							timeB=sdf.parse(time2.getSelectedItem().toString());
@@ -393,12 +398,12 @@ public class BookHistory extends JFrame{
 			public void actionPerformed(ActionEvent b) {
 				// TODO Auto-generated method stub
 				ArrayList<TableDataList>tdlist=new ArrayList<TableDataList>();
-				Date time;Date timeA = null;Date timeB = null;String data2=null;
+				Date time;Date timeA = null;Date timeB = null;
 				String flag2 = null;
 				try{
 					DBConnection("root","");
 					Statement stmt = dbConn.createStatement();
-					data2 = "SELECT * FROM test2";
+					String data2 = "SELECT * FROM op";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -494,7 +499,7 @@ public class BookHistory extends JFrame{
 						tmp[i][6]=tdlist.get(i).Status();
 					}
 					
-					bookSign = new String[]{"No.","類別","書名","作者","借閱日期","歸還日期","狀態"};
+					bookSign = new String[]{"使用者ID","類別","書名","書籍編號","借閱日期","歸還日期","狀態"};
 					jtb1.setModel(new DefaultTableModel(tmp,bookSign));
 				}//----------try end------------
 				catch(Exception d){
@@ -534,7 +539,7 @@ public class BookHistory extends JFrame{
 	private void JShowData(String td [][]) {
 		
         tableData = td;
-        bookSign = new String[]{"No.","類別","書名","作者","借閱日期","歸還日期","狀態"};
+        bookSign = new String[]{"使用者ID","類別","書名","書籍編號","借閱日期","歸還日期","狀態"};
         tmodel = new DefaultTableModel(tableData,bookSign); //建立表格
         
         /*
