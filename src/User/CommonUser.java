@@ -24,7 +24,6 @@ import dandan.DBConnection;
 
 import java.sql.Statement;
 
-
 class CommonUser extends JFrame {
 	private String jblname[] = { "帳號:", "輸入密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:", "權限:" };
 	private JLabel jbl[] = new JLabel[9];
@@ -93,7 +92,7 @@ class CommonUser extends JFrame {
 		subjbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (jtf[1].getText().equals(jtf[2].getText())) {
-					String sqlStr = "insert into Userdata(account,password,name,birthday,phone,email,subject,authority) values"
+					String sqlStr = "insert into usermanagement(userid,password,name,birthday,phone,email,subject,authority) values"
 							+ "('" + jtf[0].getText() + "','" + jtf[1].getText() + "','" + jtf[3].getText() + "','"
 							+ jtf[4].getText() + "','" + jtf[5].getText() + "','" + jtf[6].getText() + "','"
 							+ jtf[7].getText() + "','" + jtf[8].getText() + "')";
@@ -120,4 +119,3 @@ class CommonUser extends JFrame {
 	}
 
 }
-
