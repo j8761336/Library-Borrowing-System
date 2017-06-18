@@ -25,12 +25,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 class Userdata extends JFrame {
-	private String jlbname[] = { "帳號:", "姓名:", "系級:", "生日:", "email:", "電話:" };
-	private JLabel jlb[] = new JLabel[6];
-	private JLabel datajlb[] = new JLabel[6];
+	private String jlbname[] = { "帳號:", "系級:", "生日:", "email:", "電話:" };
+	private JLabel jlb[] = new JLabel[5];
+	private JLabel datajlb[] = new JLabel[5];
 	private JButton jbtn = new JButton("修改資料");
-	private JPanel jlbjpl = new JPanel(new GridLayout(6, 1, 3, 3));
-	private JPanel datajlbjpl = new JPanel(new GridLayout(6, 1, 3, 3));
+	private JPanel jlbjpl = new JPanel(new GridLayout(5, 1, 3, 3));
+	private JPanel datajlbjpl = new JPanel(new GridLayout(5, 1, 3, 3));
 	private Container cp;
 	private Font ft = new Font(null, Font.CENTER_BASELINE, 24);
 
@@ -42,8 +42,8 @@ class Userdata extends JFrame {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Userdata rp = new Userdata("1", "1");
-		rp.setVisible(true);
+//		Userdata rp = new Userdata("1", "1");
+//		rp.setVisible(true);
 	}
 
 	public Userdata(String id, String pass) {
@@ -64,12 +64,12 @@ class Userdata extends JFrame {
 		jbtn.setFont(ft);
 		this.setTitle("使用者");
 		// datajlbjpl.setBackground(Color.pink);
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 5; i++) {
 			jlb[i] = new JLabel(jlbname[i]);
 			jlbjpl.add(jlb[i]);
 			jlb[i].setFont(ft);
 		}
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 5; i++) {
 			datajlb[i] = new JLabel("", SwingConstants.CENTER);
 			datajlbjpl.add(datajlb[i]);
 			datajlb[i].setFont(ft);
@@ -111,9 +111,9 @@ class Userdata extends JFrame {
 			while (rs.next()) {
 				for (int i = 0; i < colCount - 2; i++) {
 					if (i == 0) {
-						datajlb[i].setText(rs.getString(1));
+						datajlb[i].setText(rs.getString(2));
 					} else {
-						datajlb[i].setText(rs.getString(i + 2));
+						datajlb[i].setText(rs.getString(i + 3));
 					}
 				}
 			}
@@ -132,7 +132,7 @@ class Userdata extends JFrame {
 	}
 
 	private ResultSet getData() {
-		String sqlStr = "select*from usermanagement where userid=" + Id + "&&" + "Password=" + Pass + "";
+		String sqlStr = "select*from usermanagement where userid=" + Id + "&&" + "password=" + Pass + "";
 		try {
 			queryStmt = (Statement) dbConn.createStatement();
 			rs = queryStmt.executeQuery(sqlStr);
