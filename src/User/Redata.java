@@ -80,28 +80,28 @@ class Redata extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				switch (i) {
 				case 1:
-					str = "update userdata set account='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set account='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 2:
-					str = "update userdata set password='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set password='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 3:
-					str = "update userdata set name='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set name='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 4:
-					str = "update userdata set subject='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set subject='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 5:
-					str = "update userdata set birthday='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set birthday='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 6:
-					str = "update userdata set email='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set email='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 7:
-					str = "update userdata set phone='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set phone='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 				case 8:
-					str = "update userdata set authority='" + jtf1.getText() + "'where account='" + account + "'";
+					str = "update usermanagement set authority='" + jtf1.getText() + "'where account='" + account + "'";
 					break;
 
 				}
