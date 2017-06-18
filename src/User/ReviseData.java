@@ -24,14 +24,14 @@ import java.sql.Statement;
 
 public class ReviseData extends JFrame {
 	private String account;
-	private String jlbname[] = { "帳號:", "密碼", "姓名:", "系級:", "生日:", "E-mail:", "電話:", "權限" };
-	private JLabel jlb[] = new JLabel[8];
-	private JLabel jlb2[] = new JLabel[8];
-	private JButton jbts[] = new JButton[8];
+	private String jlbname[] = { "帳號:", "密碼", "系級:", "生日:", "E-mail:", "電話:", "權限" };
+	private JLabel jlb[] = new JLabel[7];
+	private JLabel jlb2[] = new JLabel[7];
+	private JButton jbts[] = new JButton[7];
 	private String jbtname = ("修改");
-	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 30, 30));
-	private JPanel jlb2jpl = new JPanel(new GridLayout(8, 1, 30, 30));
-	private JPanel jbtjpl = new JPanel(new GridLayout(8, 1, 20, 20));
+	private JPanel jlbjpl = new JPanel(new GridLayout(7, 1, 30, 30));
+	private JPanel jlb2jpl = new JPanel(new GridLayout(7, 1, 30, 30));
+	private JPanel jbtjpl = new JPanel(new GridLayout(7, 1, 20, 20));
 	private Container cp;
 	private Font ft = new Font(null, Font.CENTER_BASELINE, 24);
 
@@ -59,17 +59,17 @@ public class ReviseData extends JFrame {
 			jlb2[7].setVisible(false);
 			jbts[7].setVisible(false);
 		}
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			jlb[i] = new JLabel(jlbname[i]);
 			jlbjpl.add(jlb[i]);
 			jlb[i].setFont(ft);
 		}
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			jlb2[i] = new JLabel();
 			jlb2jpl.add(jlb2[i]);
 			jlb2[i].setFont(ft);
 		}
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			jbts[i] = new JButton("修改");
 			jbtjpl.add(jbts[i]);
 			jbts[i].setFont(ft);
@@ -114,8 +114,8 @@ public class ReviseData extends JFrame {
 			meta = rs.getMetaData();
 			colCount = meta.getColumnCount();
 			while (rs.next()) {
-				for (int i = 0; i < colCount; i++) {
-					jlb2[i].setText(rs.getString(i + 1));
+				for (int i = 0; i < colCount - 1; i++) {
+					jlb2[i].setText(rs.getString(i + 2));
 
 				}
 
@@ -123,7 +123,7 @@ public class ReviseData extends JFrame {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "資料庫出錯");
 		}
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 7; i++) {
 			int k = i + 1;
 			jbts[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
