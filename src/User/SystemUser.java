@@ -50,12 +50,12 @@ public class SystemUser extends JFrame {
 	private JButton addjbtn = new JButton("新增");
 	private JButton revjbtn = new JButton("修改");
 	private JButton deljbtn = new JButton("刪除");
-	private String jlbstr[] = { "帳號", "密碼", "姓名", "系級", "生日", "email", "電話", "權限", "刪除" };
-	private JLabel jlb[] = new JLabel[9];
+	private String jlbstr[] = { "帳號", "密碼", "系級", "生日", "email", "電話", "權限", "刪除" };
+	private JLabel jlb[] = new JLabel[8];
 
 	private JScrollPane datajsp;
 	private JPanel funcjpl = new JPanel(new GridLayout(4, 1, 5, 20));
-	private JPanel jlbjpl = new JPanel(new GridLayout(1, 9, 4, 4));
+	private JPanel jlbjpl = new JPanel(new GridLayout(1, 8, 4, 4));
 	private JPanel deljpl = new JPanel();
 	private JButton deljbtn2 = new JButton("刪除");
 	private JButton revjbtn2 = new JButton("修改");
@@ -168,12 +168,12 @@ public class SystemUser extends JFrame {
 			rs = queryStmt.executeQuery(sqlStr);
 			meta = rs.getMetaData();
 			int count = meta.getColumnCount();
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < 8; i++) {
 				jlb[i] = new JLabel(jlbstr[i]);
 				jlbjpl.add(jlb[i]);
 
 			}
-			for (int i = 0; i < 9; i++) {
+			for (int i = 0; i < 8; i++) {
 				model.addColumn(jlbstr[i]);
 
 			}
@@ -185,8 +185,8 @@ public class SystemUser extends JFrame {
 			while (rs.next()) {
 
 				Vector vc = new Vector();
-				for (int i = 0; i < count; i++) {
-					vc.addElement(rs.getString(i + 1));
+				for (int i = 0; i < count - 1; i++) {
+					vc.addElement(rs.getString(i + 2));
 				}
 
 				model.addRow(vc);
@@ -198,7 +198,7 @@ public class SystemUser extends JFrame {
 			// 設定Table高度
 			table.getTableHeader().setPreferredSize(new Dimension(table.getColumnModel().getTotalColumnWidth(), 50));
 			// 表頭寬度設置
-			table.getColumnModel().getColumn(8).setCellEditor(new DefaultCellEditor(new JCheckBox()));
+			table.getColumnModel().getColumn(7).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 			table.setDefaultRenderer(Object.class, new TableCellRenderer() {
 
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
@@ -220,13 +220,13 @@ public class SystemUser extends JFrame {
 			// table.setRowSelectionAllowed(false);
 			// table.setColumnSelectionAllowed(false);
 
-			TableColumn tc = table.getColumnModel().getColumn(8);
+			TableColumn tc = table.getColumnModel().getColumn(7);
 			tc.setMaxWidth(0);
 			tc.setPreferredWidth(0);
 			tc.setMinWidth(0);
 			tc.setWidth(0);
-			table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-			table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+			table.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+			table.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
 
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "資料庫出錯");
@@ -243,13 +243,13 @@ public class SystemUser extends JFrame {
 
 		deljbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TableColumn showdel = table.getColumnModel().getColumn(8);
+				TableColumn showdel = table.getColumnModel().getColumn(7);
 				showdel.setMaxWidth(100);
 				showdel.setPreferredWidth(100);
 				showdel.setMinWidth(50);
 				showdel.setWidth(50);
-				table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(70);
-				table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(50);
+				table.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(70);
+				table.getTableHeader().getColumnModel().getColumn(7).setMinWidth(50);
 				deljbtn2.setVisible(true);
 				revjbtn2.setVisible(false);
 				deljbtn2.setFont(f1);
@@ -274,13 +274,13 @@ public class SystemUser extends JFrame {
 		});
 		revjbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TableColumn showdel = table.getColumnModel().getColumn(8);
+				TableColumn showdel = table.getColumnModel().getColumn(7);
 				showdel.setMaxWidth(100);
 				showdel.setPreferredWidth(100);
 				showdel.setMinWidth(50);
 				showdel.setWidth(50);
-				table.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(70);
-				table.getTableHeader().getColumnModel().getColumn(8).setMinWidth(50);
+				table.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(70);
+				table.getTableHeader().getColumnModel().getColumn(7).setMinWidth(50);
 				revjbtn2.setVisible(true);
 				deljbtn2.setVisible(false);
 				revjbtn2.addActionListener(new ActionListener() {
