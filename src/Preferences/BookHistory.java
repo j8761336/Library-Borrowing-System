@@ -66,7 +66,7 @@ public class BookHistory extends JFrame{
 
 	private void init(){
 		
-		this.setTitle("search(user)");
+		this.setTitle("search(for server)");
 		cp=this.getContentPane();
 		cp.setLayout(new BorderLayout(2,3));
 		

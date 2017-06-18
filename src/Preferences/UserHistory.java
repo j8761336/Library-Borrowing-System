@@ -66,7 +66,7 @@ public class UserHistory extends JFrame{
 
 	private void init(){
 		
-		this.setTitle("search(user)");
+		this.setTitle("search(for user)");
 		cp=this.getContentPane();
 		cp.setLayout(new BorderLayout(2,3));
 		
