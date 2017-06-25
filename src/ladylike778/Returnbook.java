@@ -21,7 +21,7 @@ import javax.swing.table.TableModel;
 public class Returnbook extends JFrame {
 	String load[]=new String[7];
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url ="jdbc:mysql://127.0.0.1:3306/test?"+ "";
+	private String url ="jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=utf8";
 	private Connection dbConn;
 	private JTextField bookid=new JTextField("書籍編號");
 	private JButton research=new JButton("查詢");
@@ -53,7 +53,7 @@ public class Returnbook extends JFrame {
 		research.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
-				try{DBConnection("root","");
+				try{DBConnection("root","123456");
 				Statement stmt= dbConn.createStatement();
 				String data="SELECT*FROM bookpreemption WHERE bookid="+bookid.getText();
 				ResultSet rs=stmt.executeQuery(data);
@@ -64,9 +64,9 @@ public class Returnbook extends JFrame {
 				while(rs.next()){
 					for(int i=1;i<=co;i++){
 						
-						load[i-1]=rs.getString(i);						
+						load[i-1]=rs.getString(i)	;				
 						bookSign=new String[]{"借用者","分類","書名","編號","借出日期","應歸還日期","狀態"};
-						String t[][] ={{usersid,load[0],load[1],load[2],load[4],sdf.format(cl.getTime()),load[6]}};
+						String t[][] ={{usersid,load[1],load[2],load[3],load[4],sdf.format(cl.getTime()),load[6]}};
 						tableData=t;						
 						loinfo.setModel(new DefaultTableModel(tableData,bookSign));						
 						}					
@@ -76,15 +76,15 @@ public class Returnbook extends JFrame {
 		enter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt= dbConn.createStatement();
 					Calendar cl=Calendar.getInstance();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				    System.out.println(sdf.format(cl.getTime()));
 				    String data="INSERT bookpreemption(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
-							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+sdf.format(cl.getTime())+"','"+"已歸還"+"')";
+							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+sdf.format(cl.getTime())+"','"+"returned"+"')";
 					stmt.executeUpdate(data);
-					String data2="UPDATE bookmanagement SET status='館藏'WHERE bookid="+bookid.getText();
+					String data2="UPDATE bookmanagement SET status='save' WHERE id="+Integer.parseInt(bookid.getText());
 					stmt.executeUpdate(data2);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

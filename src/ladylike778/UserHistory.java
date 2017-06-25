@@ -28,7 +28,7 @@ import java.sql.SQLException;
 
 public class UserHistory extends JFrame{
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url ="jdbc:mysql://127.0.0.1:3306/test?";	
+	private String url ="jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=utf8";	
 	private Connection dbConn;
 	
 	private JTextField search = new JTextField();
@@ -199,7 +199,7 @@ public class UserHistory extends JFrame{
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 DBConnection("root","");
+				 DBConnection("root","123456");
 			}
 		});
 		//------------------------------------------
@@ -396,7 +396,7 @@ public class UserHistory extends JFrame{
 				Date time;Date timeA = null;Date timeB = null;String data2=null;
 				String flag2 = null;
 				try{
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt = dbConn.createStatement();
 					data2 = "SELECT * FROM bookpreemption";
 					ResultSet rs = stmt.executeQuery(data2);
@@ -560,7 +560,7 @@ public class UserHistory extends JFrame{
 		ArrayList<VarietyList>vrlist=new ArrayList<VarietyList>();
 		ArrayList<TableDataList>tdlist1=new ArrayList<TableDataList>();
 		try{
-			DBConnection("root","");
+			DBConnection("root","123456");
 			Statement stmt = dbConn.createStatement();
 			String data2 = "SELECT * FROM  bookpreemption ";
 			ResultSet rs = stmt.executeQuery(data2);

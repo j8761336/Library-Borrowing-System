@@ -8,7 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import dandan.DBConnection;
+import ladylike778.LoanFrame;
+
 import javax.swing.*;
+
+import BookManagement.MainFrame;
+import User.Userdata;
 import dandan.DBConnection;
 public class MainFrame3 extends JFrame{
 	private Button btn1 =new Button("User management");
@@ -39,10 +44,16 @@ public class MainFrame3 extends JFrame{
 		btn2.setSize(150,80);
 		btn3.setSize(150,80);
 		btn4.setSize(150,80);
-		this.add(btn1);
-//		this.add(btn2);
+//		this.add(btn1);
+		this.add(btn2);
 //		this.add(btn3);
 //		this.add(btn4);
+
+		btn2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				BookManagement.MainFrame mtmmm = new MainFrame();
+			}
+		});
 	}
 }
 

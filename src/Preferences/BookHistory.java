@@ -30,7 +30,7 @@ public class BookHistory extends JFrame{
 	private String driver = "com.mysql.jdbc.Driver";
 	private String url ="jdbc:mysql://127.0.0.1:3306/test?";	
 	private Connection dbConn;
-	private String tablechoose ="test2";
+	private String tablechoose ="bookpreemption";
 	
 	private JTextField search = new JTextField();
 	private JButton doSearch = new JButton("search");
@@ -99,10 +99,10 @@ public class BookHistory extends JFrame{
 		time2.addItem("日期");
 		time2.addItem("全部時間");
 		variety.addItem("全部");
-		variety.addItem("借閱中");
-		variety.addItem("已歸還");
-		variety.addItem("遺失");
-		variety.addItem("館藏中");
+		variety.addItem("loaned");
+		variety.addItem("returned");
+		variety.addItem("lose");
+		variety.addItem("save");
 		variety.addItem("查詢使用者記錄");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar calendar = new GregorianCalendar(2011, 1-1, 1,0,0,0);
@@ -200,7 +200,7 @@ public class BookHistory extends JFrame{
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 DBConnection("root","");
+				 DBConnection("root","123456");
 			}
 		});
 		//------------------------------------------
@@ -216,7 +216,7 @@ public class BookHistory extends JFrame{
 				Date time;Date timeA = null;Date timeB = null;
 				float a1 = 0,a2=0,a3=0,a4=0,a5=0;
 				try{
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt = dbConn.createStatement();
 					String data2 = "SELECT * FROM "+tablechoose;
 					ResultSet rs = stmt.executeQuery(data2);
@@ -340,16 +340,16 @@ public class BookHistory extends JFrame{
 						tmp[i][5]=tdlist.get(i).returnDate();
 						tmp[i][6]=tdlist.get(i).Status();
 					}
-					System.out.println("1");
+
 					System.out.println(tdlist.size());
 					for(int i=0;i<tdlist.size();i++){
 						for(int j=0;j<vrlist.length;j++){
 							if(tmp[i][1].equals(vrlist[j])){
 								vtl [j]++;
-								System.out.println(vtl[i]);
+//								System.out.println(vtl[i]);
 							}
 						}
-					}System.out.println("2");
+					}
 
 				}
 				
@@ -375,7 +375,7 @@ public class BookHistory extends JFrame{
 
 				float vtl1 [] =ElseFun2();
 				try{
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt = dbConn.createStatement();
 					String data2 = "SELECT * FROM "+tablechoose;
 					
@@ -526,7 +526,7 @@ public class BookHistory extends JFrame{
 				Date time;Date timeA = null;Date timeB = null;
 				String flag2 = null;
 				try{
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt = dbConn.createStatement();
 					String data2 = "SELECT * FROM "+tablechoose;
 					ResultSet rs = stmt.executeQuery(data2);
@@ -700,7 +700,7 @@ public class BookHistory extends JFrame{
 		ArrayList<VarietyList>vrlist=new ArrayList<VarietyList>();
 		ArrayList<TableDataList>tdlist1=new ArrayList<TableDataList>();
 		try{
-			DBConnection("root","");
+			DBConnection("root","123456");
 			Statement stmt = dbConn.createStatement();
 			String data2 = "SELECT * FROM  "+tablechoose;
 			ResultSet rs = stmt.executeQuery(data2);
@@ -727,9 +727,11 @@ public class BookHistory extends JFrame{
 			}
 //			System.out.println(tdlist1.size());
 			
-			
+			System.out.println(vrlist.size());
 			for(int i=0;i<vrlist.size();i++){
 				for(int j=0;j<vrlist.size();j++){
+					System.out.println("i=" + i);
+					System.out.println("j=" + j);
 					if(j!=i){
 						if(vrlist.get(i).retVariety().equals(vrlist.get(j).retVariety())){
 							vrlist.remove(j);

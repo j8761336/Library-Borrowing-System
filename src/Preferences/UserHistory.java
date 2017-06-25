@@ -199,7 +199,7 @@ public class UserHistory extends JFrame{
 		jmuDBConn.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 DBConnection("root","");
+				 DBConnection("root","123456");
 			}
 		});
 		//------------------------------------------
@@ -396,9 +396,9 @@ public class UserHistory extends JFrame{
 				Date time;Date timeA = null;Date timeB = null;String data2=null;
 				String flag2 = null;
 				try{
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt = dbConn.createStatement();
-					data2 = "SELECT * FROM op";
+					data2 = "SELECT * FROM bookpreemption";
 					ResultSet rs = stmt.executeQuery(data2);
 					ResultSetMetaData rm = rs.getMetaData();
 					int cnum = rm.getColumnCount();
@@ -560,9 +560,9 @@ public class UserHistory extends JFrame{
 		ArrayList<VarietyList>vrlist=new ArrayList<VarietyList>();
 		ArrayList<TableDataList>tdlist1=new ArrayList<TableDataList>();
 		try{
-			DBConnection("root","");
+			DBConnection("root","123456");
 			Statement stmt = dbConn.createStatement();
-			String data2 = "SELECT * FROM  test2 ";
+			String data2 = "SELECT * FROM  bookpreemption ";
 			ResultSet rs = stmt.executeQuery(data2);
 			ResultSetMetaData rm = rs.getMetaData();
 			int cnum = rm.getColumnCount();

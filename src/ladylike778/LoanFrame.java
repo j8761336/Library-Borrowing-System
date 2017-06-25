@@ -22,7 +22,7 @@ public class LoanFrame extends JFrame {
 	
 	String load[]=new String[5];
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url ="jdbc:mysql://127.0.0.1:3306/test?"+ "";
+	private String url ="jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=utf8";
 	private Connection dbConn;
 	private JTextField bookid=new JTextField("書籍編號");
 	private JButton research=new JButton("查詢");
@@ -56,9 +56,9 @@ public class LoanFrame extends JFrame {
 		research.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
-				try{DBConnection("root","");
+				try{DBConnection("root","123456");
 				Statement stmt= dbConn.createStatement();
-				String data="SELECT*FROM bookmanagement WHERE bookid="+bookid.getText();
+				String data="SELECT*FROM bookmanagement WHERE id="+bookid.getText();
 				ResultSet rs=stmt.executeQuery(data);
 				ResultSetMetaData rm=(ResultSetMetaData) rs.getMetaData();
 				int co=rm.getColumnCount();
@@ -68,10 +68,13 @@ public class LoanFrame extends JFrame {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				while(rs.next()){
 					for(int i=1;i<=co;i++){
-						
-						load[i-1]=rs.getString(i);						
+						if(i-1==0){
+							int a=rs.getInt(i);
+							String b=Integer.toString(a);
+							load[i-1]=b;}else{
+						load[i-1]=rs.getString(i);}						
 						bookSign=new String[]{"借用者","分類","書名","編號","借出日期","應歸還日期","狀態"};
-						String t[][] ={{usersid,load[0],load[1],load[2],sdf.format(cl.getTime()),sdf.format(cal.getTime()),load[4]}};
+						String t[][] ={{usersid,load[1],load[2],load[0],sdf.format(cl.getTime()),sdf.format(cal.getTime()),load[4]}};
 						tableData=t;						
 						loinfo.setModel(new DefaultTableModel(tableData,bookSign));						
 						}					
@@ -81,7 +84,7 @@ public class LoanFrame extends JFrame {
 		enter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				try {
-					DBConnection("root","");
+					DBConnection("root","123456");
 					Statement stmt= dbConn.createStatement();
 					Calendar cl=Calendar.getInstance();
 					Calendar cal=Calendar.getInstance();
@@ -89,9 +92,9 @@ public class LoanFrame extends JFrame {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				    System.out.println(sdf.format(cl.getTime()));
 					String data="INSERT bookpreemption(userid,category,booktitle,bookid,loandate,returndate,status)VALUES"
-							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+"未知"+"','"+"借閱中"+"')";
+							+ " ("+usersid+",'"+loinfo.getValueAt(0, 1)+"','"+loinfo.getValueAt(0, 2)+"','"+loinfo.getValueAt(0, 3)+"','"+loinfo.getValueAt(0, 4)+"','"+"未知"+"','"+"loaned"+"')";
 					stmt.executeUpdate(data);
-					String data2="UPDATE bookmanagement SET status='借閱中'WHERE bookid="+bookid.getText();
+					String data2="UPDATE bookmanagement SET status='借閱中'WHERE id="+bookid.getText();
 					stmt.executeUpdate(data2);
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
@@ -135,7 +138,7 @@ public class LoanFrame extends JFrame {
 	}	
 	
 	        private void Showdata(String usersid,String load[]){						
-        	String t[][] ={{usersid,load[0],load[1],load[2],load[3]}};			
+        	String t[][] ={{usersid,"","","","","",""}};			
 	        	tableData=t;
 			bookSign=new String[]{"借用者","分類","書名","編號","借出日期","歸還日期","狀態"};
 			tmodel=new DefaultTableModel(tableData,bookSign);

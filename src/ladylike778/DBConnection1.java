@@ -8,7 +8,7 @@ import com.mysql.jdbc.Statement;
 
 public class DBConnection1 {
 	private String driver = "com.mysql.jdbc.Driver";
-	private String url ="jdbc:mysql://127.0.0.1:3306/test?"+ "";
+	private String url ="jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncodeing=utf8";
 	public DBConnection1(String id,String pw){
 		try{
 //			System.out.println("hi");

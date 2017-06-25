@@ -17,7 +17,7 @@ public class Login extends JFrame {
 	private final boolean shouldFill = true;
 	private JLabel jlbID = new JLabel("ID: ");
 	private JLabel jlbPasswd = new JLabel("Password: ");
-	private JTextField jtfID = new JTextField();
+	private static JTextField jtfID = new JTextField();
 	private JPasswordField jpwf = new JPasswordField();
 	private JButton jbtnExit = new JButton("Exit");
 	private JButton jbtnGo = new JButton("Go");
@@ -104,7 +104,7 @@ public class Login extends JFrame {
 					while (rs.next()) {
 						if (rs.getString("password").equals(str)) {
 							if (rs.getString("authority").equals("1")) {
-								MainFrame1 mf1 = new MainFrame1();
+								MainFrame1 mf1 = new MainFrame1(id);
 								mf1.setVisible(true);
 							}if (rs.getString("authority").equals("2")) {
 								MainFrame2 mf2 = new MainFrame2();

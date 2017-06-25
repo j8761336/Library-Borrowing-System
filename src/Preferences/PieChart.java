@@ -29,10 +29,10 @@ public class PieChart extends JFrame{
 	public PieChart(String applicationTitle,String ChartTitle,String[] vrlist,float[] vtl){
 		super(applicationTitle);
 //		System.out.println(vrlist.length);
-//		for(int i=0;i<vrlist.length;i++){
-//			System.out.println(vrlist[i]);
-//			System.out.println(vtl[i]);
-//		}
+		for(int i=0;i<vrlist.length;i++){
+			System.out.println(vrlist[i]);
+			System.out.println(vtl[i]);
+		}
 		PieDataset dataset = creatDataset(vrlist,vtl);
 		JFreeChart chart =creatChart(dataset,ChartTitle);
 		ChartPanel chartPanel = new ChartPanel(chart);

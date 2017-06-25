@@ -12,17 +12,18 @@ public class TEST extends JFrame {
 	private static JButton b1=new JButton("借書");
 	private static JButton b2=new JButton("還書");
 	private static JButton b3=new JButton("歷史紀錄");
-
-	public static void main(String[] args) {
+	private String a1;
+	 public TEST(String account) {
+		// TODO Auto-generated constructor stub
+		 this.a1=account;
+	}
+	public void Tt(){
+		 Tt1();
+	 }
+	public void Tt1() {
 		// TODO Auto-generated method stub
 		
-//		LoanFrame bro=new LoanFrame(null);
-//		bro.setVisible(true);
-//		
-//		Returnbook re =new Returnbook(null);
-//		re.setVisible(true);
-//		DBmainframe oo=new DBmainframe();
-//		oo.setVisible(true);
+
 		JFrame a=new JFrame();
 		a.setVisible(true);
 		a.setLayout(null);
@@ -32,7 +33,7 @@ public class TEST extends JFrame {
 		a.add(b1);a.add(b2);a.add(b3);
 		b1.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String c=Login.getUserId();
+				String c=a1;
 				LoanFrame b=new LoanFrame(c);
 						b.setVisible(true);
 			
@@ -40,7 +41,7 @@ public class TEST extends JFrame {
 	});
 		b2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String k=Login.getUserId();
+				String k=a1;
 				Returnbook e1=new Returnbook(k);
 						e1.setVisible(true);
 			
@@ -48,7 +49,7 @@ public class TEST extends JFrame {
 	});
 		b3.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String h=Login.getUserId();
+				String h=a1;
 				UserHistory b=new UserHistory(h);
 						b.setVisible(true);
 			

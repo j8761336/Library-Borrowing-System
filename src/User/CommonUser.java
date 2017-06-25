@@ -25,13 +25,13 @@ import dandan.DBConnection;
 import java.sql.Statement;
 
 class CommonUser extends JFrame {
-	private String jblname[] = { "帳號:", "輸入密碼:", "再次輸入密碼:", "姓名:", "生日:", "聯絡電話:", "E-Mail:", "系級:", "權限:" };
-	private JLabel jbl[] = new JLabel[9];
+	private String jblname[] = { "帳號:", "輸入密碼:", "再次輸入密碼:", "系級:", "生日:", "E-Mail:", "電話:", "權限:" };
+	private JLabel jbl[] = new JLabel[8];
 
 	private JButton subjbtn = new JButton("送出");
-	private JTextField jtf[] = new JTextField[9];
-	private JPanel jlbjpl = new JPanel(new GridLayout(9, 1, 3, 3));
-	private JPanel jtfjpl = new JPanel(new GridLayout(9, 1, 3, 3));
+	private JTextField jtf[] = new JTextField[8];
+	private JPanel jlbjpl = new JPanel(new GridLayout(8, 1, 3, 3));
+	private JPanel jtfjpl = new JPanel(new GridLayout(8, 1, 3, 3));
 	private Container cp;
 	private Font f1 = new Font(null, Font.CENTER_BASELINE, 24);
 
@@ -52,13 +52,13 @@ class CommonUser extends JFrame {
 		cp.setLayout(new GridBagLayout());
 		subjbtn.setFont(f1);
 		this.setTitle("創建一般使用者");
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 8; i++) {
 			jbl[i] = new JLabel(jblname[i]);
 			jlbjpl.add(jbl[i]);
 			jbl[i].setFont(f1);
 
 		}
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 8; i++) {
 			jtf[i] = new JTextField();
 			jtfjpl.add(jtf[i]);
 		}
@@ -92,10 +92,10 @@ class CommonUser extends JFrame {
 		subjbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (jtf[1].getText().equals(jtf[2].getText())) {
-					String sqlStr = "insert into usermanagement(userid,password,name,birthday,phone,email,subject,authority) values"
+					String sqlStr = "insert into usermanagement(userid,password,subject,birthday,email,phone,authority) values"
 							+ "('" + jtf[0].getText() + "','" + jtf[1].getText() + "','" + jtf[3].getText() + "','"
 							+ jtf[4].getText() + "','" + jtf[5].getText() + "','" + jtf[6].getText() + "','"
-							+ jtf[7].getText() + "','" + jtf[8].getText() + "')";
+							+ jtf[7].getText() + "')";
 					try {
 						DBConnection sq = new DBConnection();
 						dbConn = sq.getConn();

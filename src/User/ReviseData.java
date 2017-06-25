@@ -54,11 +54,6 @@ public class ReviseData extends JFrame {
 		cp = this.getContentPane();
 		cp.setLayout(new GridBagLayout());
 		this.setTitle("修改資料");
-		if (set == 1) {
-			jlb[7].setVisible(false);
-			jlb2[7].setVisible(false);
-			jbts[7].setVisible(false);
-		}
 		for (int i = 0; i < 7; i++) {
 			jlb[i] = new JLabel(jlbname[i]);
 			jlbjpl.add(jlb[i]);
@@ -73,6 +68,11 @@ public class ReviseData extends JFrame {
 			jbts[i] = new JButton("修改");
 			jbtjpl.add(jbts[i]);
 			jbts[i].setFont(ft);
+		}
+		if (set == 1) {
+			jlb[6].setVisible(false);
+			jlb2[6].setVisible(false);
+			jbts[6].setVisible(false);
 		}
 		GridBagConstraints g = new GridBagConstraints();
 		g.gridx = 1;
@@ -109,7 +109,7 @@ public class ReviseData extends JFrame {
 			DBConnection sql = new DBConnection();
 			dbConn = sql.getConn();
 			queryStmt = (Statement) dbConn.createStatement();
-			rs = queryStmt.executeQuery("select*from usermanagement where userid=" + account + "");
+			rs = queryStmt.executeQuery("select * from usermanagement where userid=" + account + "");
 			int colCount;
 			meta = rs.getMetaData();
 			colCount = meta.getColumnCount();
@@ -124,7 +124,7 @@ public class ReviseData extends JFrame {
 			JOptionPane.showMessageDialog(null, "資料庫出錯");
 		}
 		for (int i = 0; i < 7; i++) {
-			int k = i + 1;
+			int k = i + 2;
 			jbts[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					Redata rd = new Redata(k, account);

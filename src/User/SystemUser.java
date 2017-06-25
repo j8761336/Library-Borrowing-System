@@ -50,7 +50,7 @@ public class SystemUser extends JFrame {
 	private JButton addjbtn = new JButton("新增");
 	private JButton revjbtn = new JButton("修改");
 	private JButton deljbtn = new JButton("刪除");
-	private String jlbstr[] = { "帳號", "密碼", "系級", "生日", "email", "電話", "權限", "刪除" };
+	private String jlbstr[] = { "帳號", "密碼", "系級", "生日", "email", "電話", "權限", "刪除/修改" };
 	private JLabel jlb[] = new JLabel[8];
 
 	private JScrollPane datajsp;
@@ -95,7 +95,7 @@ public class SystemUser extends JFrame {
 		};
 		table.getTableHeader().setReorderingAllowed(false);
 		// 使儲存格不可移動
-		table.setFont(new Font(null, Font.PLAIN, 16));
+
 
 		funcjpl.add(addjbtn);
 		funcjpl.add(revjbtn);
@@ -159,12 +159,12 @@ public class SystemUser extends JFrame {
 		dbConn = sl.getConn();
 		try {
 			queryStmt = (Statement) dbConn.createStatement();
-			rs = queryStmt.executeQuery("select*from userdata");
+			rs = queryStmt.executeQuery("select*from usermanagement");
 			while (rs.next()) {
 				row++;
 			}
 
-			String sqlStr = "select*from Userdata";
+			String sqlStr = "select*from usermanagement";
 			rs = queryStmt.executeQuery(sqlStr);
 			meta = rs.getMetaData();
 			int count = meta.getColumnCount();
@@ -204,13 +204,12 @@ public class SystemUser extends JFrame {
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 						boolean hasFocus, int row, int column) {
 					// 判断是否为需要渲染的列
-					if (column == 8) {
+					if (column == 7) {
 						// 和方法一基本一致
 						JCheckBox box = new JCheckBox();
 						box.setSelected(isSelected);
 						// 设置单选box.setSelected(hasFocus);
-						// box.setHorizontalAlignment((int) CENTER_ALIGNMENT);
-						// // 0.5f
+
 						return box;
 					}
 					// 如果不是需要渲染的列，封装文本域显示数据

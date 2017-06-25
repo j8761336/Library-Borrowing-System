@@ -1,5 +1,8 @@
 package dandan;
 import java.awt.*;
+import ladylike778.TEST;
+import User.Userdata;
+//import ladylike778.LoanFrame;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,17 +11,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import dandan.DBConnection;
+import ladylike778.LoanFrame;
+
 import javax.swing.*;
 import dandan.DBConnection;
 public class MainFrame1 extends JFrame{
+	
 	private Button btn1 =new Button("User management");
 	private Button btn2 =new Button("Book management");
 	private Button btn3 =new Button("Borrow books");
 	private Button btn4 =new Button("Analysis & Report");
-
+private String account;
 	
-	public MainFrame1(){
+	public MainFrame1(String str){
+		account=str;
 		initComp();
+		
 	}
 	private void initComp(){
 		this.setSize(600,500);
@@ -43,6 +51,19 @@ public class MainFrame1 extends JFrame{
 //		this.add(btn2);
 		this.add(btn3);
 //		this.add(btn4);
+		Login lo = new Login();
+		btn1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Userdata us =new Userdata(account);
+			}
+		});
+		btn3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				TEST te =new TEST(account);
+				te.Tt();
+			}
+		});
 	}
 }
 

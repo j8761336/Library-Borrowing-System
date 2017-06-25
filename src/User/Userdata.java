@@ -23,8 +23,9 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import dandan.Login;
 
-class Userdata extends JFrame {
+public class Userdata extends JFrame {
 	private String jlbname[] = { "帳號:", "系級:", "生日:", "email:", "電話:" };
 	private JLabel jlb[] = new JLabel[5];
 	private JLabel datajlb[] = new JLabel[5];
@@ -35,20 +36,21 @@ class Userdata extends JFrame {
 	private Font ft = new Font(null, Font.CENTER_BASELINE, 24);
 
 	private Connection dbConn;
-	private Statement queryStmt = null;
-	private ResultSet rs = null;
+	private Statement queryStmt;
+	private ResultSet rs;
 	private ResultSetMetaData meta;
-	private String Id, Pass;
+	Login lo = new Login();
+	// private String Id = lo.getUserId();
+	private String Id;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		Userdata rp = new Userdata("1", "1");
-//		rp.setVisible(true);
+		// Userdata rp = new Userdata("1", "1");
+		// rp.setVisible(true);
 	}
 
-	public Userdata(String id, String pass) {
-		Id = id;
-		Pass = pass;
+	public Userdata(String str) {
+		Id = str;
 		setVisible(true);
 		DBConnection sc = new DBConnection();
 		dbConn = sc.getConn();
@@ -105,11 +107,12 @@ class Userdata extends JFrame {
 
 		try {
 			int colCount;
-			rs = getData();
+			queryStmt = (Statement) dbConn.createStatement();
+			rs = queryStmt.executeQuery("select*from usermanagement where userid="+Id+"");
 			meta = rs.getMetaData();
 			colCount = meta.getColumnCount();
 			while (rs.next()) {
-				for (int i = 0; i < colCount - 2; i++) {
+				for (int i = 0; i < colCount - 3; i++) {
 					if (i == 0) {
 						datajlb[i].setText(rs.getString(2));
 					} else {
@@ -119,26 +122,18 @@ class Userdata extends JFrame {
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "無法顯示資料");
+			System.out.println(e.toString());
 
 		}
 		jbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int a = 1;
-				ReviseData re = new ReviseData(Id, a);
+			
+				ReviseData re = new ReviseData(Id, 1);
 			}
 
 		});
 
 	}
 
-	private ResultSet getData() {
-		String sqlStr = "select*from usermanagement where userid=" + Id + "&&" + "password=" + Pass + "";
-		try {
-			queryStmt = (Statement) dbConn.createStatement();
-			rs = queryStmt.executeQuery(sqlStr);
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "資料取得失敗");
-		}
-		return rs;
-	}
+
 }

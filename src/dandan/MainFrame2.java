@@ -1,5 +1,9 @@
 package dandan;
 import java.awt.*;
+
+import Preferences.BookHistory;
+import Preferences.main;
+import User.SystemUser;
 import java.awt.event.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +12,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import dandan.DBConnection;
+import ladylike778.LoanFrame;
+import BookManagement.*;
+
 import javax.swing.*;
+
+import BookManagement.MainFrame;
+import User.Userdata;
 import dandan.DBConnection;
 public class MainFrame2 extends JFrame{
 	private Button btn1 =new Button("User management");
@@ -43,5 +53,23 @@ public class MainFrame2 extends JFrame{
 		this.add(btn2);
 //		this.add(btn3);
 		this.add(btn4);
+		btn1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				SystemUser su =new SystemUser();
+			}
+		});
+		btn2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				BookManagement.MainFrame nnnn = new MainFrame();
+				
+			}
+		});
+
+		btn4.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				BookHistory bst = new BookHistory();
+				bst.setVisible(true);
+			}
+		});
 	}
 }
